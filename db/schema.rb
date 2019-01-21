@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_134422) do
+ActiveRecord::Schema.define(version: 2019_01_21_163716) do
 
   create_table "designs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "template"
+    t.integer "height"
+    t.integer "width"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,6 +49,9 @@ ActiveRecord::Schema.define(version: 2019_01_21_134422) do
     t.integer "design_id"
     t.string "image"
     t.integer "user_id"
+    t.datetime "valid_until"
+    t.string "discount_type"
+    t.string "service"
   end
 
 end

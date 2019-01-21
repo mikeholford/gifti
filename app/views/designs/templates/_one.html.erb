@@ -1,9 +1,29 @@
-<div class="voucher-wrapper" style="background-image: url('/assets/designs/templates/one.png')">
-  <p class="voucher-title"><stong><%=@voucher.heading%></stong></p>
-  <p class="voucher-sub-title"><stong><%=@voucher.sub_heading%></stong></p>
-  <p class="player-name">👉 <%= @voucher.for %></p>
-  <p class="voucher-code">👉 <%= @voucher.code %></p>
-  <p class="voucher-valid"><em>Valid until: <%= (@voucher.created_at + 6.months).strftime("#{@voucher.created_at.day.ordinalize} %B %Y") %></em></p>
-  <p class="voucher-value"><%=number_to_currency(@voucher.value.to_f, precision: 2, unit: "$")%></p>
-  <p class="voucher-for">OFF URBAN HUNT</p>
+<div class="voucher-wrapper" style="background-image: url('/assets/designs/templates/one.png')" id="<%=@voucher.design.template%>">
+  <% if @voucher.heading.present? %>
+    <p class="heading"><stong><%=@voucher.heading%></stong></p>
+  <% end %>
+
+  <% if @voucher.sub_heading.present? %>
+    <p class="sub-heading"><stong><%=@voucher.sub_heading.truncate(80)%></stong></p>
+  <% end %>
+
+  <% if @voucher.for.present? %>
+    <p class="for"><%= @voucher.for %></p>
+  <% end %>
+
+  <% if @voucher.code.present? %>
+    <p class="code"><%= @voucher.code %></p>
+  <% end %>
+
+  <% if @voucher.valid_until.present? %>
+    <p class="valid-until"><%= (@voucher.valid_until).strftime("#{@voucher.valid_until.day}.%m.%y") %></p>
+  <% end %>
+
+  <% if @voucher.value.present? %>
+    <p class="value"><%= @voucher.discount_type unless @voucher.discount_type == "%"%><%= sprintf("%g", @voucher.value)%><%= @voucher.discount_type if @voucher.discount_type == "%"%></p>
+  <% end %>
+
+  <% if @voucher.service.present? %>
+    <p class="service">OFF <%= @voucher.service.upcase%></p>
+  <% end %>
 </div>

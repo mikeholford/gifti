@@ -1,78 +1,88 @@
-.voucher-wrapper {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  position: relative;
+// Color Settings
+$primary: #F17474;
+
+// Wrapper style
+.voucher-wrapper#one {
+
+  // Size
   max-width: 700px;
-  width: 100%;
-  height: 300px;
-  p {
-    margin: 0;
-  }
-  .voucher-title {
+  height: 280px;
+
+  .heading {
+    max-width: 420px;
+    overflow-x: hidden;
+    white-space: nowrap;
     font-size: 50px;
-    font-weight: 700;
-    color: hsl(206, 51%, 43%);
+    font-weight: 900;
+    color: $primary;
     position: relative;
     top: 10px;
     left: 20px;
   }
-  .voucher-sub-title {
+  .sub-heading {
+    max-width: 430px;
     font-size: 20px;
     font-weight: 700;
-    color: hsl(206, 51%, 43%);
+    color: #6b6b6b;
     position: relative;
-    top: 0px;
+    top: 5px;
     left: 20px;
   }
-  .player-name {
+  .for {
+    max-width: 350px;
+    white-space: nowrap;
+    overflow-x: hidden;
     font-size: 40px;
-    font-weight: 500;
-    color: hsl(206, 51%, 43%);
+    font-weight: 700;
+    color: $primary;
     position: relative;
     top: 25px;
-    left: 25px;
+    left: 20px;
     i {
       font-size: 30px;
       position: relative;
       left: -5px;
     }
   }
-  .voucher-code {
+  .code {
+    max-width: 345px;
+    overflow-x: hidden;
     font-size: 40px;
     font-weight: 700;
-    color: hsl(206, 51%, 43%);
+    color: $primary;
     position: relative;
     top: 10px;
-    left: 25px;
+    left: 20px;
     i {
       font-size: 30px;
       position: relative;
       left: -5px;
     }
   }
-  .voucher-valid {
+  .valid-until {
     font-size: 20px;
-    color: hsl(206, 51%, 43%);
-    position: relative;
-    top: 55px;
-    left: 20px;
+    color: #ffffff;
+    position: absolute;
+    top: 2px;
+    right: 15px;
+    font-weight: 500;
   }
-  .voucher-value {
-    font-size: 50px;
+  .value {
+    font-size: 80px;
     color: #fff;
     font-weight: 700;
     position: absolute;
-    right: 20px;
-    top: 190px;
+    right: 15px;
+    top: 140px;
   }
-  .voucher-for {
+  .service {
+    max-width: 275px;
+    overflow-x: hidden;
     font-size: 20px;
     color: #fff;
     font-weight: 900;
     position: absolute;
-    right: 23px;
-    top: 250px;
+    right: 15px;
+    top: 240px;
   }
-
 }
