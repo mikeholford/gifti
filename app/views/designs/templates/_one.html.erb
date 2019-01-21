@@ -1,6 +1,5 @@
 <div class="voucher-wrapper" style="background-image: url('/assets/designs/templates/one.png')">
   <p class="voucher-title"><stong><%=@voucher.heading%></stong></p>
-  <p class="voucher-title"><stong><%=@voucher.sub_heading%></stong></p>
   <p class="player-name">👉<%= @voucher.for %></p>
   <p class="voucher-code">👉<%= @voucher.code %></p>
   <p class="voucher-valid"><em>Valid until: <%= (@voucher.created_at + 6.months).strftime("#{@voucher.created_at.day.ordinalize} %B %Y") %></em></p>

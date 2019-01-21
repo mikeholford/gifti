@@ -5,7 +5,7 @@ class Voucher < ApplicationRecord
   after_create :save_screenshot
 
   def save_screenshot
-    voucher_url = Screenshot.new({url: "https://urbanhunt.co",thumbnail_max_width: 700,viewport: "700x300"}).url
+    voucher_url = Screenshot.new({url: "#{root_url}vouchers/#{id}/key=#{user.secret_key}",thumbnail_max_width: 700,viewport: "700x300"}).url
     self.update(image: voucher_url)
   end
 
