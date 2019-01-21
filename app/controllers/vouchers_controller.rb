@@ -8,8 +8,16 @@ class VouchersController < ApplicationController
 
 
   def show
-
-    voucher_url = Screenshot.new({url: "https://urbanhunt.co",thumbnail_max_width: 700,viewport: "700x300"}).url
+    if params[:key].present?
+      @user = User.find_by_secret_key(params[:key])
+      if @user.present?
+        @voucher = Voucher.find(params[:id])
+      else
+        redirect_to '/'
+      end
+    else
+      redirect_to '/'
+    end
     # Rails.application.credentials.screenshotlayer[:access_key]
   end
 
@@ -69,7 +77,7 @@ class VouchersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def voucher_params
-      params.require(:voucher).permit(:name, :heading, :sub_heading, :value, :from, :for, :code, :send_at, :message, :design_id)
+      params.require(:voucher).permit(:name, :heading, :sub_heading, :value, :from, :for, :code, :send_at, :message, :design_id, :user_id)
     end
 
 end

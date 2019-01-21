@@ -1,3 +1,70 @@
-.epic {
-  font-size: 100px !important;
+.voucher-wrapper {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  height: 300px;
+  p {
+    margin: 0;
+  }
+  .voucher-title {
+    font-size: 50px;
+    font-weight: 700;
+    color: hsl(206, 51%, 43%);
+    position: relative;
+    top: 10px;
+    left: 20px;
+  }
+  .player-name {
+    font-size: 40px;
+    font-weight: 500;
+    color: hsl(206, 51%, 43%);
+    position: relative;
+    top: 25px;
+    left: 25px;
+    i {
+      font-size: 30px;
+      position: relative;
+      left: -5px;
+    }
+  }
+  .voucher-code {
+    font-size: 40px;
+    font-weight: 700;
+    color: hsl(206, 51%, 43%);
+    position: relative;
+    top: 10px;
+    left: 25px;
+    i {
+      font-size: 30px;
+      position: relative;
+      left: -5px;
+    }
+  }
+  .voucher-valid {
+    font-size: 20px;
+    color: hsl(206, 51%, 43%);
+    position: relative;
+    top: 55px;
+    left: 20px;
+  }
+  .voucher-value {
+    font-size: 50px;
+    color: #fff;
+    font-weight: 700;
+    position: absolute;
+    right: 20px;
+    top: 190px;
+  }
+  .voucher-for {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 900;
+    position: absolute;
+    right: 23px;
+    top: 250px;
+  }
+
 }

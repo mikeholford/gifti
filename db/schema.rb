@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_121303) do
+ActiveRecord::Schema.define(version: 2019_01_21_134422) do
 
   create_table "designs", force: :cascade do |t|
     t.string "name"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 2019_01_21_121303) do
     t.datetime "send_at"
     t.text "message"
     t.integer "design_id"
+    t.string "image"
+    t.integer "user_id"
   end
 
 end
