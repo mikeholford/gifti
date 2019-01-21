@@ -1,0 +1,69 @@
+<%= form_with(model: voucher, local: true) do |form| %>
+  <% if voucher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(voucher.errors.count, "error") %> prohibited this voucher from being saved:</h2>
+
+      <ul>
+      <% voucher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :design_id %>
+
+    <%= form.collection_select :design_id, Design.order(:name),:id,:name, include_blank: true %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :send_at %>
+    <%= form.datetime_field :send_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :heading %>
+    <%= form.text_field :heading %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_heading %>
+    <%= form.text_field :sub_heading %>
+  </div>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.number_field :value %>
+  </div>
+
+  <div class="field">
+    <%= form.label :from %>
+    <%= form.text_field :from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :for %>
+    <%= form.text_field :for %>
+  </div>
+
+  <div class="field">
+    <%= form.label :message %>
+    <%= form.text_field :message %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

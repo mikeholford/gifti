@@ -1,0 +1,52 @@
+<p>
+  <strong>Design:</strong>
+  <%= @voucher.design.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @voucher.name %>
+</p>
+
+<p>
+  <strong>Heading:</strong>
+  <%= @voucher.heading %>
+</p>
+
+<p>
+  <strong>Sub Heading:</strong>
+  <%= @voucher.sub_heading %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @voucher.value %>
+</p>
+
+<p>
+  <strong>Send At:</strong>
+  <%= @voucher.send_at %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @voucher.message %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @voucher.from %>
+</p>
+
+<p>
+  <strong>For:</strong>
+  <%= @voucher.for %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @voucher.code %>
+</p>
+
+<%= link_to 'Edit', edit_voucher_path(@voucher) %> |
+<%= link_to 'Back', vouchers_path %>

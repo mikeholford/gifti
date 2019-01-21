@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  heading: MyString
+  sub_heading: MyString
+  value: 1.5
+  for: MyString
+  code: MyString
+
+two:
+  name: MyString
+  heading: MyString
+  sub_heading: MyString
+  value: 1.5
+  for: MyString
+  code: MyString
