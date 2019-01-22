@@ -24,7 +24,15 @@ class VouchersController < ApplicationController
 
 
   def new
-    @voucher = Voucher.new
+    if params[:design].present?
+      if Design.where(id: params[:design]).last.present?
+        @voucher = Voucher.new
+      else
+        redirect_to designs_path
+      end
+    else
+      redirect_to designs_path
+    end
   end
 
 

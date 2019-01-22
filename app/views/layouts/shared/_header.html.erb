@@ -1,6 +1,6 @@
 <nav class="container navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
+    <a class="navbar-item" href="/" style="padding: 0px 20px 0px 0px;">
       <%= image_tag ("logo.png") %>
     </a>
 
@@ -54,6 +54,11 @@
 
 
     <div class="navbar-end">
+      <% if user_signed_in? %>
+        <div class="navbar-item">
+          <%= current_user.email %>
+        </div>
+      <% end %>
       <div class="navbar-item">
         <% if user_signed_in? %>
           <div class="buttons">

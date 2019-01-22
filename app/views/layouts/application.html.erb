@@ -13,11 +13,8 @@
   </head>
 
   <body class="site">
-
-    <% if notice %><p class="alert alert-success"><%= notice %></p><% end %>
-    <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
-
     <%= render 'layouts/shared/header' %>
+    <%= custom_flash %>
     <%= yield %>
   </body>
 </html>
