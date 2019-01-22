@@ -1,9 +1,9 @@
-$primary: $blue !default;
+$primary: $turquoise !default;
 
 $info: $cyan !default;
 $success: $green !default;
 $warning: $yellow !default;
-$danger: $red !default;
+$danger: #ff9091 !default;
 
 $light: $white-bis !default;
 $dark: $grey-darker !default;
@@ -67,6 +67,7 @@ $link-active-border: $grey-dark !default;
 // Typography
 
 $family-primary: $family-montserrat !default;
+$family-secondary: $family-patrick !default;
 $family-code: $family-monospace !default;
 
 $size-small: $size-7 !default;

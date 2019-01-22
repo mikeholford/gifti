@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=Patrick+Hand');
+
 
 // Colors
 
@@ -27,6 +29,7 @@ $red: hsl(348, 100%, 61%) !default;
 
 // Typography
 $family-montserrat: 'Montserrat', sans-serif;
+$family-patrick: 'Patrick Hand', sans-serif;
 $family-monospace: monospace !default;
 $render-mode: optimizeLegibility !default;
 
