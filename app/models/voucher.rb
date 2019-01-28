@@ -2,6 +2,7 @@ class Voucher < ApplicationRecord
   belongs_to :user
   belongs_to :design
 
+  after_create :create_code
   after_create :save_screenshot unless Rails.env.development?
 
   validates_presence_of :value, message: "must be present"
@@ -12,13 +13,17 @@ class Voucher < ApplicationRecord
 
 
 
+  def create_ref
+    self.update_attribute('ref', "#{SecureRandom.hex(1)}#{self.id}#{SecureRandom.hex(2)}")
+  end
+
   def save_screenshot
     voucher_url = Screenshot.new({
       url: "https://gifti.club/vouchers/#{self.id}/capture/?key=#{self.user.secret_key}",
       thumbnail_max_width: self.design.width,
       viewport: "#{self.design.width}x#{self.design.height}"
     }).url
-    self.update(image: voucher_url)
+    self.update_attribute('image', voucher_url)
   end
 
 end

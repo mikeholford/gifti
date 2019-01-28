@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :designs
   resources :api_accesses, :path => 'api'
 
+  mount API::Base, at: "/"
 
   root :to => "statics#landing"
 end

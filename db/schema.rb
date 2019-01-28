@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_072638) do
+ActiveRecord::Schema.define(version: 2019_01_28_150649) do
 
   create_table "api_accesses", force: :cascade do |t|
     t.string "user_id"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2019_01_28_072638) do
     t.integer "request_count"
     t.string "key"
     t.boolean "live", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "api_requests", force: :cascade do |t|
+    t.integer "api_access_id"
+    t.string "request_type"
+    t.string "path"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -77,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_01_28_072638) do
     t.string "service"
     t.string "for_email"
     t.boolean "scheduled", default: false
+    t.string "ref"
   end
 
 end

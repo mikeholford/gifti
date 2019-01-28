@@ -1,5 +1,6 @@
 class ApiAccess < ApplicationRecord
   belongs_to :user
+  has_many :api_requests
 
   after_create :generate_key
 

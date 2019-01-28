@@ -15,9 +15,25 @@ module Gifti
 
     config.generators.test_framework :rspec
 
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+  end
+end
+
+module Api
+  class Application < Rails::Application
+    config.middleware.use Rack::Cors do
+      allow do
+        origins "*"
+        resource "*", headers: :any, methods: [:get,
+            :post, :put, :delete, :options]
+      end
+    end
+    # config.active_record.raise_in_transactional_callbacks = true
   end
 end
