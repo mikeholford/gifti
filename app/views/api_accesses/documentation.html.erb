@@ -1,0 +1,172 @@
+<section class="api-documentation-wrapper hero has-background-primary">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+
+          <h1 class="patrick has-text-centered is-size-1 has-text-weight-bold">Gifti API</h1>
+          <br>
+          <p class="is-size-5">If you would like access to our API please <a href="/api/new" class="has-text-grey-dark has-text-weight-bold">click here</a> and fill in your details for instant access.</p>
+          <br>
+          <h2 class="has-text-weight-bold patrick is-size-2">Guidelines</h2>
+          <ul class="is-size-5">
+            <li>- Do not copy the core functionality of Gifti</li>
+            <li>- The API is rate-limited to <strong class="has-text-grey-dark">200 requests per hour</strong> and <strong class="has-text-grey-dark">20,000 requests per month</strong>.</li>
+          </ul>
+
+          <br><br>
+
+          <h2 class="has-text-weight-bold patrick is-size-2">Authorization</h2>
+          <p class="is-size-5">After you received your API key you can start using this API. To get access you have to add a HTTP Authorization header to each of your requests:</p>
+          <br>
+          <pre>Authorization: YOUR_API_KEY</pre>
+          <br>
+          <p class="is-size-5">You can also pass this value using a <code>client_id</code> query parameter</p>
+          <br>
+          <pre>https://api.gifti.club/v1/templates/?client_id=YOUR_ACCESS_KEY</pre>
+
+          <br><br>
+
+          <h2 class="has-text-weight-bold patrick is-size-2">Fetch Templates</h2>
+          <br><pre>GET /templates</pre><br>
+          <p class="is-size-5"><strong class="has-text-grey-dark">Response</strong></p>
+          <br><pre>200 OK<br>X-Ratelimit-Limit: 1000<br>X-Ratelimit-Remaining: 999</pre>
+          <br>
+          <pre>[<br>  {<br>    "id": "christmas19",<br>    "created_at": "2018-05-03T11:00:28-04:00",<br>    "updated_at": "2018-07-10T11:00:01-05:00",<br>    "width": 500,<br>    "height": 50,<br>    "name": "Christmas 19",<br>    "image_url": "https://gifti.club/templates/christmas19.jpg"<br>  },<br>  // ... more templates<br>]</pre><br>
+          <p class="is-size-5">If you want to fetch a <strong class="has-text-grey-dark">specific template</strong> you can use:</p>
+          <br><pre>GET /templates/:id</pre><br>
+
+          <br><br>
+
+          <h2 class="has-text-weight-bold patrick is-size-2">Render a voucher</h2>
+          <p class="is-size-5">As a minumum, to render a voucher we require <code>template_name</code>, <code>value</code>, <code>discount_type</code> and <code>service</code>. Optional values can be passed as seen below.</p>
+          <br>
+          <pre>POST /voucher/new</pre>
+          <br>
+          <p class="is-size-5">All parameter options can be found below</p>
+          <br>
+
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th><abbr title="param">param</abbr></th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th><abbr title="param">param</abbr></th>
+                <th>Description</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th><code>template_id</code></th>
+                <td>The ID of the voucher template. <strong>Required</strong>.</td>
+              </tr>
+              <tr>
+                <th><code>value</code></th>
+                <td>The value of the voucher. <strong>Required</strong>.</td>
+              </tr>
+              <tr>
+                <th><code>discount_type</code></th>
+                <td>The currency or percentage of the value. <strong>Required</strong>.</td>
+              </tr>
+              <tr>
+                <th><code>service</code></th>
+                <td>The service the voucher is for. <strong>Required</strong>.</td>
+              </tr>
+              <tr>
+                <th><code>heading</code></th>
+                <td>The main text on the voucher (Optional)</td>
+              </tr>
+              <tr>
+                <th><code>sub_heading</code></th>
+                <td>A description of what the voucher offers (Optional)</td>
+              </tr>
+              <tr>
+                <th><code>for</code></th>
+                <td>Who the voucher is addressed to (Optional)</td>
+              </tr>
+              <tr>
+                <th><code>valid_until</code></th>
+                <td>When the voucher will expire (Optional)</td>
+              </tr>
+              <tr>
+                <th><code>code</code></th>
+                <td>A code required to claim the voucher (Optional)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="is-size-5"><strong class="has-text-grey-dark">Response</strong></p>
+          <br><pre>200 OK<br>X-Ratelimit-Limit: 1000<br>X-Ratelimit-Remaining: 998</pre>
+          <br>
+          <pre>{<br>  "voucher_id": "VcH08YamZ",<br>  "template_id": "amazon",<br>  "heading": "FREE BOOKS",<br>  "sub_heading": "Anything you need from Amazon Books. The largest book store in the world!",<br>  "value": 50.0,<br>  "discount_type": "$",<br>  "for": "James",<br>  "code": "AMZ50",<br>  "valid_until": "2019-05-03",<br>  "service": "Amazon",<br>  "image_url": "IMAGE_URL"<br>}</pre><br>
+
+          <br><br>
+
+          <h2 class="has-text-weight-bold patrick is-size-2">Schedule a voucher</h2>
+          <p class="is-size-5">To schedule a voucher, you first need to <a href="#create_a_voucher" class="has-text-grey-dark"><u>create a voucher</u></a>.</p>
+          <br>
+          <pre>POST /voucher/:id/schedule</pre>
+          <br>
+          <p class="is-size-5">You can also pass this value using a <code>client_id</code> query parameter</p>
+          <br>
+
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th><abbr title="param">param</abbr></th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th><abbr title="param">param</abbr></th>
+                <th>Description</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th><code>voucher_id</code></th>
+                <td>The ID of the voucher. <strong>Required</strong>.</td>
+              </tr>
+              <tr>
+                <th><code>from</code></th>
+                <td>The name of the person sending the voucher<strong>Required</strong>.</td>
+              </tr>
+              <tr>
+                <th><code>for_email</code></th>
+                <td>The email to send the voucher to. <strong>Required</strong>.</td>
+              </tr>
+              <tr>
+                <th><code>send_on</code></th>
+                <td>The date you want tohe voucher sent. <strong>Required</strong>.</td>
+              </tr>
+              <tr>
+                <th><code>message</code></th>
+                <td>A personal message to attach to the email (Optional)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="is-size-5"><strong class="has-text-grey-dark">Response</strong></p>
+          <br><pre>200 OK<br>X-Ratelimit-Limit: 1000<br>X-Ratelimit-Remaining: 998</pre>
+          <br>
+          <pre>{<br>  "voucher_id": "VcH08YamZ",<br>  "send_on": "13-03-2019",<br>  "scheduled": true<br>}</pre><br>
+
+          <br><br>
+
+          <h2 class="has-text-weight-bold patrick is-size-2">Try it out 🥳</h2>
+          <br><pre>curl -H "Authorization: YOUR_API_KEY" "https://api.gifti.club.com/v1/templates/christmas"</pre>
+
+          <br><br>
+
+          <h2 class="has-text-weight-bold patrick is-size-2">Disclaimer</h2>
+          <p class="is-size-5">Some features may change in the future. Please keep an eye oon <a href="https://headwayapp.co/gifti-changelog" target="_blank" class="has-text-weight-bold has-text-grey-dark">our changelog</a> for any updates.</p>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

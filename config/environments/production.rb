@@ -89,6 +89,19 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # Sedngrid
+  ActionMailer::Base.smtp_settings = {
+    :user_name => Rails.application.credentials.sendgrid[:username],
+    :password => Rails.application.credentials.sendgrid[:password],
+    :domain => 'gifti.club',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
+  config.action_mailer.default_url_options = { :host => "gifti.club" }
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end

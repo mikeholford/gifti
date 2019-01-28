@@ -1,0 +1,58 @@
+<section class="new-voucher-wrapper hero has-background-primary">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <% if params[:check].present? %>
+            <h1 class="title patrick has-text-white">Check the details below...</h1>
+            <p class="has-text-white is-size-5 patrick">We'll send your voucher <% if @voucher.send_at.present? %> on <strong class="has-text-white"><%= @voucher.send_at.strftime("%A, #{@voucher.send_at.day.ordinalize} of %B") %></strong><% else %><strong class="has-text-white">ASAP</strong><% end %><% if @voucher.message.present? %> with the personal message below:<% else %>.<% end %></p>
+            <% if @voucher.message.present? %>
+              <br><p class="has-text-white is-size-5 has-text-weight-bold" style="margin-left: 50px; white-space: pre-wrap;">"<%= @voucher.message %>"</p><br>
+            <% end %>
+            <p class="has-text-white is-size-5 patrick">The email will be sent by us but titled as <u><%= @voucher.from %></u> with a reply option to your personal email. We'll notify you once it's been sent.</p>
+
+            <br>
+
+            <div class="columns">
+              <div class="column is-half">
+                <div class="columns">
+                  <div class="column is-narrow">
+                    <a href="/vouchers/<%= @voucher.id %>/schedule" class="button is-medium">
+                      <span class="icon">
+                        <i class="fas fa-cog"></i>
+                      </span>
+                      <span>Edit</span>
+                    </a>
+                  </div>
+                  <div class="column is-narrow">
+
+                    <%= form_with(model: @voucher, local: true, id: "edit_voucher") do |form| %>
+                      <%= form.hidden_field :scheduled, value: true %>
+                      <div class="columns is-variable is-1">
+                        <div class="column">
+                          <div class="control">
+                            <input type="submit" name="commit" value="Confirm" data-disable-with="Scheduling", class="button is-danger is-medium has-text-weight-bold is-inverted">
+                          </div>
+                        </div>
+                      </div>
+
+                    <% end %>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <% else %>
+            <h1 class="title patrick has-text-white">Schedule your voucher</h1>
+            <p class="subtitle has-text-white patrick">Add your name, pick a date and write a personal message. We'll make sure it's delivered safely ❤️ </p>
+            <%= render 'schedule_form', voucher: @voucher %>
+          <% end %>
+        </div>
+        <div class="column">
+          <%= image_tag ("shared/progress.png"), class: "" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

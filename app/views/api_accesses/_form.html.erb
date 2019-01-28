@@ -1,0 +1,60 @@
+
+  <%= form_with(model: api_access, local: true, id: "new_api_access") do |form| %>
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="field">
+          <label class="label is-size-5 is-size-6-touch"><%= form.label :name, "Company/App Name *" %></label>
+          <div class="control">
+            <%= form.text_field :name, class: "input", placeholder: "My amazing app" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="field">
+          <label class="label is-size-5 is-size-6-touch"><%= form.label :website_url, "Website URL *" %></label>
+          <div class="control">
+            <%= form.text_field :website_url, class: "input", placeholder: "https://example.com" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="field">
+          <label class="label is-size-5 is-size-6-touch"><%= form.label :description, "What does your  service offer? *" %></label>
+          <div class="control">
+            <%= form.text_area :description, class: "textarea", placeholder: "Short description", rows: "3" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="control">
+          <input type="submit" name="commit" value="Get API Key" data-disable-with="Saving...", class="button is-danger is-medium has-text-weight-bold">
+          <p class="help is-white has-text-weight-bold">*Required fields</p>
+        </div>
+      </div>
+    </div>
+
+    <% if api_access.errors.any? %>
+      <div class="columns is-variable is-1">
+        <div class="column">
+          <div id="error_explanation" class="has-text-weight-bold">
+            <h2 class="has-text-weight-bold"><%= pluralize(api_access.errors.count, "error") %> prohibited this api_access from being saved:</h2>
+            <ul>
+            <% api_access.errors.full_messages.each do |message| %>
+              <li>- <%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>

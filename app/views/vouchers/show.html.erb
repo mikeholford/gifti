@@ -1,2 +1,39 @@
-<%= stylesheet_link_tag "designs/templates/#{@voucher.design.template}" %>
-<%= render "/designs/templates/#{@voucher.design.template}" %>
+<section class="new-voucher-wrapper hero has-background-primary">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns">
+        <div class="column">
+          <h1 class="has-text-white patrick title">Your voucher has been generated 😄</h1>
+          <p class="has-text-white patrick subtitle">Download it as a PNG or schedule it to be sent with a custom message</p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <%= image_tag ("designs/examples/one.jpg"), class: "" %>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="columns">
+            <div class="column">
+              <div class="button is-medium is-info">
+                <span class="icon">
+                  <i class="fas fa-download"></i>
+                </span>
+                <span>Download voucher</span>
+              </div>
+            </div>
+            <div class="column">
+              <a href="/vouchers/<%= @voucher.id %>/schedule" class="button is-medium is-link">
+                <span class="icon">
+                  <i class="fas fa-clock"></i>
+                </span>
+                <span>Schedule to send</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

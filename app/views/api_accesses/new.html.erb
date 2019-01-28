@@ -1,0 +1,29 @@
+<section class="new-voucher-wrapper hero has-background-primary">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+
+          <div class="box">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <% if current_user.has_api_access? %>
+                    <h1 class="title">Your API Key</h1>
+                    <input class="input" type="text" value="<%= current_user.secret_key %>" readonly>
+                    <br><br>
+                    <a class="button is-link has-text-weight-bold" href="/api/documentation">Read the Documentation</a>
+                  <% else %>
+                    <h1 class="title">Get API Access</h1>
+                    <%= render 'form', api_access: @api_access %>
+                  <% end %>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

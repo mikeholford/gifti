@@ -1,39 +1,23 @@
-<section class="landing-wrapper hero has-background-primary">
+<section class="design-wrapper hero has-background-primary">
   <div class="hero-body">
     <div class="container">
       <div class="columns">
-        <div class="column is-full">
-          <h1 class="has-text-weight-bold patrick">Pick a design:</h1>
+        <div class="column is-full has-text-centered">
+          <h1 class="title has-text-weight-bold patrick has-text-white" id="design">First, pick a template:</h1>
+          <br>
         </div>
       </div>
-      <div class="columns">
-        <% @designs.each do |design| %>
-            <div class="column is-one-third">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <%= link_to image_tag("https://bulma.io/images/placeholders/1280x960.png"), new_voucher_path(design: design.id)  %>
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4"><%= design.name %></p>
-                      <p class="subtitle is-6">by @holfyio</p>
-                    </div>
-                  </div>
+      <div class="columns is-multiline is-centered">
+        <% Design.all.each do |design| %>
+          <div class="column is-narrow">
 
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <hr>
-                    <span class="tag">Tag label</span>
-                    <span class="tag">Tag label</span>
-                    <span class="tag">Tag label</span>
-                  </div>
-                </div>
-              </div>
+            <div class="voucher-wrapper">
+              <a href="/vouchers/new/?design=<%= design.template %>">
+                <%= image_tag("designs/examples/#{design.template}.jpg", style: "max-height: 250px; max-width: #{design.width}px", class: "voucher") %>
+              </a>
             </div>
+
+          </div>
         <% end %>
       </div>
     </div>

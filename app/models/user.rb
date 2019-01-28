@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :trackable
 
   has_many :vouchers
+  has_many :api_accesses
 
   after_create :create_secret_key
   before_validation :assign_password, on: :create
@@ -19,6 +20,10 @@ class User < ApplicationRecord
       self.password = new_password
       self.password_confirmation = new_password
     end
+  end
+
+  def has_api_access?
+    ApiAccess.all.where(user_id: self.id).last.present? ? true : false
   end
 
   protected

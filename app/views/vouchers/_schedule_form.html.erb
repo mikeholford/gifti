@@ -1,0 +1,81 @@
+
+  <%= form_with(model: voucher, local: true, id: "edit_voucher") do |form| %>
+
+    <%= form.hidden_field :update_schedule, value: true %>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="field">
+          <div class="control">
+            <%= form.text_field :from, class: "input", placeholder: "From" %>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <div class="control">
+            <%= form.text_field :send_at, class: "input", placeholder: "Send on (blank to send ASAP)", type: "date", id: "send_at_date" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="field">
+          <div class="control">
+            <%= form.email_field :for_email, class: "input", placeholder: "Email to send to" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="field">
+          <div class="control">
+            <%= form.text_area :message, class: "textarea", placeholder: "Message", rows: "8" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="control">
+          <input type="submit" name="commit" value="Schedule" data-disable-with="Scheduling", class="button is-danger is-medium has-text-weight-bold is-inverted">
+          <p class="help is-white has-text-weight-bold">*Required fields</p>
+        </div>
+      </div>
+    </div>
+
+    <% if voucher.errors.any? %>
+      <div class="columns is-variable is-1">
+        <div class="column">
+          <div id="error_explanation" class="has-text-weight-bold has-text-white">
+            <h2 class="has-text-weight-bold"><%= pluralize(voucher.errors.count, "error") %> prohibited this voucher from being saved:</h2>
+            <ul>
+            <% voucher.errors.full_messages.each do |message| %>
+              <li>- <%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+
+  <script type="text/javascript">
+    var calendars = bulmaCalendar.attach('[type="date"]', {
+      displayMode: 'dialog',
+      minDate: '<%= (Date.today).strftime('%d-%m-%Y')%>',
+      maxDate: '<%= (Date.today + 2.months).strftime('%d-%m-%Y') %>',
+      dateFormat: 'DD-MM-YYYY',
+      showHeader: false,
+      showFooter: true,
+    })
+
+    var input = $( "#send_at_date" );
+    input.val( "<% if @voucher.send_at.present? %><%= @voucher.send_at.to_date.strftime('%d-%m-%Y') %><% end %>" );
+  </script>

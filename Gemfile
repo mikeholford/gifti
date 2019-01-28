@@ -43,8 +43,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-  # Use sqlite3 as the database for Active Record
+  gem 'rspec-rails', '~> 3.8'
   gem 'sqlite3'
 end
 
@@ -61,7 +60,10 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'simplecov', require: false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
+gem 'faker'
+gem 'validates_timeliness', '~> 5.0.0.alpha3'

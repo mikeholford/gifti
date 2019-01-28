@@ -10,7 +10,6 @@
               <h2 class="">Enter your email to get started</h2>
               <hr>
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                <%= devise_error_messages! %>
 
                 <div class="field has-addons">
                   <div class="control">
@@ -24,6 +23,10 @@
                   <div class="control">
                     <%= f.submit "Next", class: "button is-medium is-primary" %>
                   </div>
+
+                </div>
+                <div class="control">
+                  <%= devise_error_messages! %>
                 </div>
               <% end %>
 

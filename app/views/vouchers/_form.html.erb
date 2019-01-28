@@ -1,80 +1,118 @@
-<%= form_with(model: voucher, local: true) do |form| %>
-  <% if voucher.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(voucher.errors.count, "error") %> prohibited this voucher from being saved:</h2>
 
-      <ul>
-      <% voucher.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%= form_with(model: voucher, local: true, id: "new_voucher") do |form| %>
+    <div class="columns is-variable is-1">
+
+      <%= form.hidden_field :design_id, value: @design.id %>
+
+      <div class="column">
+        <div class="field">
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :heading, "Heading" %></label>
+          <div class="control">
+            <%= form.text_field :heading, class: "input", placeholder: "Heading" %>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :sub_heading, "Sub Heading" %></label>
+          <div class="control">
+            <%= form.text_field :sub_heading, class: "input", placeholder: "Sub Heading" %>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="field">
+          <div class="control">
+            <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :for, "For" %></label>
+            <%= form.text_field :for, class: "input", placeholder: "For" %>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :valid_until, "Valid Until" %></label>
+          <div class="control">
+            <%= form.text_field :valid_until, class: "input", placeholder: "Valid Until", type: "date"%>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column is-narrow">
+        <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :value, "Value*" %></label>
+        <div class="field has-addons">
+          <div class="control">
+            <%= form.number_field :value, class: "input", placeholder: "Value*" %>
+          </div>
+          <div class="control">
+            <div class="select">
+              <%= form.select :discount_type, options_for_select(["%", "$", "£"]) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column ">
+        <div class="field">
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :code, "Code" %></label>
+          <div class="control">
+            <%= form.text_field :code, class: "input", placeholder: "Voucher Code" %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="field">
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :service, "Service*" %></label>
+          <div class="control">
+            <%= form.text_field :service, class: "input", placeholder: "Service*, i.e. where the discont applies" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <div class="control">
+          <input type="submit" name="commit" value="Generate Voucher" data-disable-with="Generating", class="button is-danger is-medium has-text-weight-bold  is-inverted">
+          <p class="help is-white has-text-weight-bold">*Required fields</p>
+        </div>
+      </div>
+    </div>
+
+    <% if voucher.errors.any? %>
+      <div class="columns is-variable is-1">
+        <div class="column">
+          <div id="error_explanation" class="has-text-weight-bold has-text-white">
+            <h2 class="has-text-weight-bold"><%= pluralize(voucher.errors.count, "error") %> prohibited this voucher from being saved:</h2>
+            <ul>
+            <% voucher.errors.full_messages.each do |message| %>
+              <li>- <%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
   <% end %>
 
-  <%= form.hidden_field :user_id, value: current_user.id %>
-  <%= form.hidden_field :design_id, value: params[:design] %>
+  <script type="text/javascript">
+    var calendars = bulmaCalendar.attach('[type="date"]', {
+      displayMode: 'dialog',
+      minDate: '<%= (Date.today).strftime('%d-%m-%Y')%>',
+      dateFormat: 'DD-MM-YYYY',
+      showHeader: false,
+      showFooter: true,
+    })
 
-  <div class="field">
-    <%= form.label :send_at %>
-    <%= form.datetime_field :send_at %>
-  </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
 
-  <div class="field">
-    <%= form.label :heading %>
-    <%= form.text_field :heading %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sub_heading %>
-    <%= form.text_field :sub_heading %>
-  </div>
-
-  <div class="field">
-    <%= form.label :value %>
-    <%= form.number_field :value %>
-  </div>
-
-  <div class="field">
-    <%= form.label :discount_type %>
-    <%= form.text_field :discount_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :from %>
-    <%= form.text_field :from %>
-  </div>
-
-  <div class="field">
-    <%= form.label :for %>
-    <%= form.text_field :for %>
-  </div>
-
-  <div class="field">
-    <%= form.label :valid_until %>
-    <%= form.datetime_field :valid_until %>
-  </div>
-
-  <div class="field">
-    <%= form.label :message %>
-    <%= form.text_field :message %>
-  </div>
-
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :service %>
-    <%= form.text_field :service %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+  </script>

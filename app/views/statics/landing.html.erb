@@ -1,15 +1,43 @@
-<section class="landing-wrapper hero has-background-primary">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <div class="columns">
-        <div class="column">
-          <h1 class="title patrick has-text-white" id="landing">CREATE YOUR OWN<br>GIFT VOUCHER</h1>
-          <%= link_to "Pick a design", designs_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
-        </div>
-        <div class="column">
-          <%= image_tag ("landing/gift-card-2.png"), class: "" %>
+
+<script>
+  // @see https://docs.headwayapp.co/widget for more configuration options.
+  var HW_config = {
+    selector: ".changelog", // CSS selector where to inject the badge
+    account:  "7z8Eky"
+  }
+</script>
+<script async src="https://cdn.headwayapp.co/widget.js"></script>
+
+
+<div class="landing-wrapper">
+  <section class="hero has-background-primary">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns">
+          <div class="column">
+            <h1 class="title patrick has-text-white" id="landing">CREATE YOUR OWN<br>GIFT VOUCHER</h1>
+            <%= link_to "Let's get creative", designs_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
+            <p class="subtitle patrick has-text-white">or <a href="#more" class="has-text-white"><u>find out more</u></a></p>
+          </div>
+          <div class="column">
+            <%= image_tag ("landing/gift-card-2.png"), class: "" %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  <section class="hero is-medium" id="more">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns is-centered">
+          <div class="column">
+            <h1 class="title patrick is-size-1 is-size-2-touch">A unique gift in 3 steps</h1>
+            <p class=" patrick is-size-2 is-size-4-touch"><strong>1.</strong> Select a professionally designed gift voucher</p>
+            <p class=" patrick is-size-2 is-size-4-touch"><strong>2.</strong> Personalise the gift with your own words</p>
+            <p class=" patrick is-size-2 is-size-4-touch"><strong>3.</strong> Download or schedule it to be sent on a specific date</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

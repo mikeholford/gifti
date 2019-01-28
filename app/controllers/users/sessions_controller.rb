@@ -12,10 +12,41 @@ class Users::SessionsController < Devise::SessionsController
   def create
     @user = User.where(:email => params[:user][:email])[0] # you get the user now
     if @user.confirmed?
-      super
+      @user.update(login_key: SecureRandom.hex, login_key_sent: Time.now)
+      UserLoginMailer.send_magic_link(@user).deliver_later
+      redirect_to root_path, notice: "Magic link sent"
+      # super
     else
-      redirect_to new_voucher_path
+      redirect_to designs_path
     end
+  end
+
+  def magic_login
+    key = params[:key]
+    user = User.find_by_login_key(key)
+    unless user_signed_in?
+      if user.present?
+        if user.login_key_sent.present?
+          if user.login_key_sent > Time.now - 3600
+            sign_in(user)
+            user.update(login_key_sent: nil)
+            redirect_to root_path, notice: "You have been signed in!"
+          else
+            reject_magic_login
+          end
+        else
+          reject_magic_login
+        end
+      else
+        reject_magic_login
+      end
+    else
+      redirect_to root_path, alert: "Already signed in"
+    end
+  end
+
+  def reject_magic_login
+    redirect_to root_path, alert: "Access Denied"
   end
 
   # DELETE /resource/sign_out
