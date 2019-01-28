@@ -28,7 +28,6 @@ module API
             for: params[:for],
             code: params[:code],
             valid_until: params[:valid_until],
-            service: params[:service],
             discount_type: params[:discount_type],
             service: params[:service]
           )

@@ -14,7 +14,7 @@ RSpec.describe Voucher, type: :model do
           value: Faker::Number.number(2),
           service: Faker::Company.name,
         )
-        @voucher.save!
+        @voucher.save(validations: false)
       end
 
       it 'responds with URL' do
