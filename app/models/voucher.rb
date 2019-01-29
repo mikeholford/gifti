@@ -4,7 +4,7 @@ class Voucher < ApplicationRecord
   belongs_to :design
 
   after_create :create_ref
-  after_create :save_screenshot unless Rails.env.development?
+  after_save :save_screenshot unless Rails.env.development?
 
   validates_presence_of :value, message: "must be present"
   validates_presence_of :service, message: "must be present"
