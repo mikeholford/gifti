@@ -1,7 +1,7 @@
 class VouchersController < ApplicationController
   before_action :set_voucher, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
 
   layout 'headless', :only => [ :capture ]
 
