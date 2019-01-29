@@ -1,5 +1,11 @@
-<p>Welcome <%= @email %>!</p>
+<p>Hi there,<p>
 
-<p>You can confirm your account email through the link below:</p>
+<p><strong>Thanks for joining Gifti!</strong></p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>You don't need passwords here. Just click <%= link_to 'confirm my account', confirmation_url(@resource, confirmation_token: @token) %> and when you sign in next time, we'll send a magic link to your email for a one click sign in 😎</p>
+
+<p>If you have any questions, please just reply to this email. Keep an eye on <a href="https://headwayapp.co/gifti-changelog" target="_blank">our changelog</a> to view our latest updates.<p>
+
+<p>Happy gifting!</p>
+
+<p>Mike</p>

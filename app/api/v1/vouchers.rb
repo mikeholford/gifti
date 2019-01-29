@@ -33,7 +33,7 @@ module API
           )
 
           result = {
-            voucher_id: voucher.id,
+            voucher_id: voucher.ref,
             template_id: voucher.design.template,
             heading: voucher.heading,
             sub_heading: voucher.sub_heading,
@@ -43,10 +43,11 @@ module API
             code: voucher.code,
             valid_until: voucher.valid_until,
             service: voucher.service,
-            image_url: voucher.image
+            image_url: voucher.image_url
           }
-          return result
+          render result
         end
+
 
         desc "Schedule a voucher"
         params do
@@ -61,19 +62,23 @@ module API
 
           voucher = Voucher.find_by_ref(params[:id])
 
-          voucher.update!(
-            from: params[:from],
-            for_email: params[:for_email],
-            send_at: params[:send_on],
-            message: params[:message],
-            scheduled: true
-          )
-          result = {
-            voucher_id: voucher.ref,
-            send_on: voucher.send_at,
-            scheduled: true
-          }
-          return result
+          if voucher.scheduled?
+            error!('Voucher already scheduled, request a schedule update', 401)
+          else
+            voucher.update!(
+              from: params[:from],
+              for_email: params[:for_email],
+              send_at: params[:send_on],
+              message: params[:message],
+              scheduled: true
+            )
+            result = {
+              voucher_id: voucher.ref,
+              send_on: voucher.send_at,
+              scheduled: true
+            }
+            render result
+          end
         end
 
       end

@@ -9,19 +9,36 @@ module API
         get "", root: :templates do
           authenticate!
           record_api_request("get", "/templates", "Return all templates")
-
-          Design.all
+          result = Array.new
+          Design.all.each do |d|
+            result << {
+              id: d.template,
+              created_at: d.created_at,
+              updated_at: d.updated_at,
+              width: d.width,
+              height: d.height,
+              name: d.name,
+              image: d.template_image_url
+            }
+          end
+          render result
         end
 
         desc "Return a template"
-        # params do
-        #   requires :id, type: String, desc: "ID of the template"
-        # end
         get "/:id", root: "template" do
           authenticate!
           record_api_request("get", "/templates/:id", "Return a template")
-
-          Design.where(template: params[:id]).first!
+          design = Design.where(template: params[:id]).first!
+          result = {
+            id: design.template,
+            created_at: design.created_at,
+            updated_at: design.updated_at,
+            width: design.width,
+            height: design.height,
+            name: design.name,
+            image: d.template_image_url
+          }
+          render result
         end
       end
     end

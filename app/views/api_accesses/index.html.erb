@@ -10,8 +10,12 @@
                   <h1 class="title">The Gifti API</h1>
                   <p class="is-size-5">The API allows you to render our full collection of templates in your application and generate gift vouchers on the fly for your users. We'll even handle schedulling and sending. 🚀</p>
                   <div class="actions">
-                    <% if current_user.has_api_access? %>
-                      <a class="button is-danger has-text-weight-bold" href="/api/new">View API Key</a>
+                    <% if current_user.present? %>
+                      <% if current_user.has_api_access? %>
+                        <a class="button is-danger has-text-weight-bold" href="/api/new">View API Key</a>
+                      <% else %>
+                        <a class="button is-danger has-text-weight-bold" href="/api/new">Get API Access</a>
+                      <% end %>
                     <% else %>
                       <a class="button is-danger has-text-weight-bold" href="/api/new">Get API Access</a>
                     <% end %>

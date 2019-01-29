@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   match '/api/documentation' => 'api_accesses#documentation', via: [:get, :post], as: :api_documentation
 
+  match '/contact' => 'statics#contact', via: [:get, :post], as: :contact
+
+
   resources :vouchers
   resources :designs
   resources :api_accesses, :path => 'api'

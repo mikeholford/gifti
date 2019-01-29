@@ -16,7 +16,11 @@
         <div class="columns">
           <div class="column">
             <h1 class="title patrick has-text-white" id="landing">CREATE YOUR OWN<br>GIFT VOUCHER</h1>
-            <%= link_to "Let's get creative", designs_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
+            <% if current_user.present?%>
+              <%= link_to "Let's get creative", designs_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
+            <% else %>
+              <%= link_to "Let's get creative", new_user_registration_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
+            <% end %>
             <p class="subtitle patrick has-text-white">or <a href="#more" class="has-text-white"><u>find out more</u></a></p>
           </div>
           <div class="column">
@@ -33,8 +37,8 @@
           <div class="column">
             <h1 class="title patrick is-size-1 is-size-2-touch">A unique gift in 3 steps</h1>
             <p class=" patrick is-size-2 is-size-4-touch"><strong>1.</strong> Select a professionally designed gift voucher</p>
-            <p class=" patrick is-size-2 is-size-4-touch"><strong>2.</strong> Personalise the gift with your own words</p>
-            <p class=" patrick is-size-2 is-size-4-touch"><strong>3.</strong> Download or schedule it to be sent on a specific date</p>
+            <p class=" patrick is-size-2 is-size-4-touch"><strong>2.</strong> Personalise it with your own words</p>
+            <p class=" patrick is-size-2 is-size-4-touch"><strong>3.</strong> Download or schedule it to be sent</p>
           </div>
         </div>
       </div>

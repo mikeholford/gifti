@@ -39,6 +39,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  config.mailer_sender = '"Gifti" <hey@gifti.club>'
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

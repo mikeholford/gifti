@@ -3,40 +3,48 @@
     <div class="container has-text-centered">
       <div class="columns">
         <div class="column is-one-third is-offset-one-third">
-
-
           <div class="card">
             <div class="card-content">
-              <h2 class="">Enter your email to get started</h2>
+              <h2 class="">We're not live yet! 🙈</h2>
               <hr>
-              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-
-                <div class="field has-addons">
-                  <div class="control">
-                    <div class="control has-icons-left has-icons-right">
-                      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "input is-medium", type: "email" %>
-                      <span class="icon is-medium is-left">
-                        <i class="fas fa-envelope"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="control">
-                    <%= f.submit "Next", class: "button is-medium is-primary" %>
-                  </div>
-
-                </div>
-                <div class="control">
-                  <%= devise_error_messages! %>
-                </div>
-              <% end %>
-
+              <p>If you would like early beta access, please sign up via our <a href="#" class="has-text-weight-bold">Product Hunt page</a></p>
             </div>
-            <footer class="card-footer">
-              <%= render "devise/shared/links" %>
-            </footer>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
+
+<!--
+<div class="card-content">
+  <h2 class="">Enter your email to get started</h2>
+  <hr>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+    <div class="field has-addons">
+      <div class="control">
+        <div class="control has-icons-left has-icons-right">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "input is-medium", type: "email" %>
+          <span class="icon is-medium is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+      </div>
+      <div class="control">
+        <%= f.submit "Next", class: "button is-medium is-primary" %>
+      </div>
+
+    </div>
+    <div class="control">
+      <%= devise_error_messages! %>
+    </div>
+  <% end %>
+
+</div>
+<footer class="card-footer">
+  <%= render "devise/shared/links" %>
+</footer>
+ -->

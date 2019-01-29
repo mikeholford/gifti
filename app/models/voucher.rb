@@ -1,4 +1,5 @@
 class Voucher < ApplicationRecord
+  mount_uploader :image, GiftVoucherUploader
   belongs_to :user
   belongs_to :design
 
@@ -14,7 +15,7 @@ class Voucher < ApplicationRecord
 
 
   def create_ref
-    self.update_attribute('ref', "#{SecureRandom.hex(1)}#{self.id}#{SecureRandom.hex(2)}")
+    self.update_attribute('ref', "#{SecureRandom.hex(1)}#{self.id}#{SecureRandom.hex(1)}")
   end
 
   def save_screenshot
@@ -23,7 +24,7 @@ class Voucher < ApplicationRecord
       thumbnail_max_width: self.design.width,
       viewport: "#{self.design.width}x#{self.design.height}"
     }).url
-    self.update_attribute('image', voucher_url)
+    self.update_attributes(remote_image_url: "#{voucher_url}")
   end
 
 end

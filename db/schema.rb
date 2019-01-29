@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_150649) do
+ActiveRecord::Schema.define(version: 2019_01_29_152528) do
 
   create_table "api_accesses", force: :cascade do |t|
     t.string "user_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_01_28_150649) do
     t.string "template"
     t.integer "height"
     t.integer "width"
+    t.string "template_image"
   end
 
   create_table "users", force: :cascade do |t|
