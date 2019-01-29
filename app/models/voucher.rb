@@ -25,7 +25,7 @@ class Voucher < ApplicationRecord
         thumbnail_max_width: self.design.width,
         viewport: "#{self.design.width}x#{self.design.height}"
       }).url
-      self.update_attributes(remote_image_url: "#{voucher_url}")
+      self.update_attribute('remote_image_url', "#{voucher_url}")
     end
   end
 
