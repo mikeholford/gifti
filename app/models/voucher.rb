@@ -4,7 +4,7 @@ class Voucher < ApplicationRecord
   belongs_to :design
 
   after_create :create_ref
-  after_save :save_screenshot unless Rails.env.development?
+  after_create :save_screenshot unless Rails.env.development?
 
   validates_presence_of :value, message: "must be present"
   validates_presence_of :service, message: "must be present"
@@ -19,12 +19,14 @@ class Voucher < ApplicationRecord
   end
 
   def save_screenshot
-    voucher_url = Screenshot.new({
-      url: "https://gifti.club/vouchers/#{self.id}/capture/?key=#{self.user.secret_key}",
-      thumbnail_max_width: self.design.width,
-      viewport: "#{self.design.width}x#{self.design.height}"
-    }).url
-    self.update_attributes(remote_image_url: "#{voucher_url}")
+    after_transaction do
+      voucher_url = Screenshot.new({
+        url: "https://gifti.club/vouchers/#{self.id}/capture/?key=#{self.user.secret_key}",
+        thumbnail_max_width: self.design.width,
+        viewport: "#{self.design.width}x#{self.design.height}"
+      }).url
+      self.update_attributes(remote_image_url: "#{voucher_url}")
+    end
   end
 
 end
