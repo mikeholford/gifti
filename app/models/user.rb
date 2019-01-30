@@ -8,10 +8,15 @@ class User < ApplicationRecord
   has_many :api_accesses
 
   after_create :create_secret_key
+  after_create :notify_admin
   before_validation :assign_password, on: :create
 
   def create_secret_key
     self.update(secret_key: SecureRandom.hex)
+  end
+
+  def notify_admin
+    NotifieeAPI.notify(:mike, :telegram, "New Customer: #{self.email}")
   end
 
   def assign_password

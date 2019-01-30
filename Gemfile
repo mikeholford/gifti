@@ -79,3 +79,4 @@ gem 'mini_magick'
 gem 'carrierwave-aws'
 gem 'ar_after_transaction'
 gem 'whenever', require: false
+gem 'notifiee-ruby'
