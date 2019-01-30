@@ -172,7 +172,7 @@
 								<td width="100%" colspan="3" align="center" style="padding-bottom:10px;padding-top:25px;">
 									<div class="contentEditableContainer contentTextEditable">
 	                	<div class="contentEditable" align='center' >
-	                  		<h2 >It's been a while...</h2>
+                      <h2 >A gift from <%= @voucher.from %> 🎁</h2>
 	                	</div>
 	              	</div>
 								</td>
@@ -200,7 +200,7 @@
 											<td bgcolor="#00D1B2" align="center" style="border-radius:4px;" width="200" height="50">
 												<div class="contentEditableContainer contentTextEditable">
 				                	<div class="contentEditable" align='center' >
-				                  		<a target='_blank' href="#" class='link2'>Click here to download it</a>
+				                  		<a target='_blank' href="<%= @voucher.image_url %>" class='link2' style="color: #ffffff; text-decoration: none;">Download Voucher</a>
 				                	</div>
 				              	</div>
 											</td>
@@ -224,47 +224,17 @@
 								<td width="60%" height="70" valign="middle" style="padding-bottom:20px;">
 									<div class="contentEditableContainer contentTextEditable">
                   	<div class="contentEditable" align='left' >
-                    	<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Sent to <%= @voucher.for_email %> by Gifti</span>
+                    	<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Sent to <%= @voucher.for_email %> by Gifti</span><br>
+                      <span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;"><a href="https://giti.club/?ref=email">Create your own voucher with Gifti</a></span>
                   	</div>
                 	</div>
 								</td>
-								<!-- <td width="40%" height="70" align="right" valign="top" align='right' style="padding-bottom:20px;">
-									<table width="100%" border="0" cellspacing="0" cellpadding="0" align='right'>
-										<tr>
-											<td width='57%'></td>
-											<td valign="top" width='34'>
-												<div class="contentEditableContainer contentFacebookEditable" style='display:inline;'>
-							                        <div class="contentEditable" >
-							                            <img src="images/facebook.png" data-default="placeholder" data-max-width='30' data-customIcon="true" width='30' height='30' alt='facebook' style='margin-right:40x;'>
-							                        </div>
-							                    </div>
-											</td>
-											<td valign="top" width='34'>
-												<div class="contentEditableContainer contentTwitterEditable" style='display:inline;'>
-							                      <div class="contentEditable" >
-							                        <img src="images/twitter.png" data-default="placeholder" data-max-width='30' data-customIcon="true" width='30' height='30' alt='twitter' style='margin-right:40x;'>
-							                      </div>
-							                    </div>
-											</td>
-											<td valign="top" width='34'>
-												<div class="contentEditableContainer contentImageEditable" style='display:inline;'>
-							                      <div class="contentEditable" >
-							                        <a target='_blank' href="#" data-default="placeholder"  style="text-decoration:none;">
-														<img src="images/pinterest.png" width="30" height="30" data-max-width="30" alt='pinterest' style='margin-right:40x;' />
-													</a>
-							                      </div>
-							                    </div>
-											</td>
-										</tr>
-									</table>
-								</td> -->
 							</tr>
 						</table>
 					</div>
 				</td>
 			</tr>
 		</table>
-
 
 	</td></tr></table>
 
