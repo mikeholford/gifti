@@ -12,7 +12,7 @@ class Voucher < ApplicationRecord
   validates_presence_of :from, message: "must be present", on: :update
   validates_date :send_at, after: Date.today, after_message: "must be in the future", before: (Date.today + 2.months), before_message: "must be within 2 months", allow_blank: true, on: :update
 
-
+  scope :scheduled, -> { where(scheduled: true) }
 
   def create_ref
     self.update_attribute('ref', "#{SecureRandom.hex(1)}#{self.id}#{SecureRandom.hex(1)}")

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_152528) do
+ActiveRecord::Schema.define(version: 2019_01_30_061725) do
 
   create_table "api_accesses", force: :cascade do |t|
     t.string "user_id"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_01_29_152528) do
     t.string "for_email"
     t.boolean "scheduled", default: false
     t.string "ref"
+    t.boolean "sent", default: false
   end
 
 end

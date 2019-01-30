@@ -1,6 +1,6 @@
 class VouchersController < ApplicationController
-  before_action :set_voucher, only: [:show, :edit, :update, :destroy]
 
+  before_action :set_voucher, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
 
   layout 'headless', :only => [ :capture ]
@@ -8,7 +8,6 @@ class VouchersController < ApplicationController
   def index
     redirect_to new_voucher_path
   end
-
 
   def show
     @voucher = Voucher.find(params[:id])
@@ -36,7 +35,6 @@ class VouchersController < ApplicationController
     redirect_to schedule_voucher_path if @voucher.scheduled == false
   end
 
-
   def new
     if params[:design].present?
       @design = Design.where(template: params[:design]).last
@@ -50,10 +48,8 @@ class VouchersController < ApplicationController
     end
   end
 
-
   def edit
   end
-
 
   def create
     @voucher = Voucher.new(voucher_params.merge(:user_id => current_user.id))
@@ -69,8 +65,6 @@ class VouchersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /vouchers/1
-  # PATCH/PUT /vouchers/1.json
   def update
     respond_to do |format|
       if @voucher.update(voucher_params)
@@ -90,8 +84,6 @@ class VouchersController < ApplicationController
     end
   end
 
-  # DELETE /vouchers/1
-  # DELETE /vouchers/1.json
   def destroy
     @voucher.destroy
     respond_to do |format|
@@ -101,13 +93,12 @@ class VouchersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_voucher
       @voucher = Voucher.find(params[:id])
       redirect_to root_path if @voucher.user_id != current_user.id
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def voucher_params
       params.require(:voucher).permit(:name, :heading, :sub_heading, :value, :from, :for, :code, :send_at, :message, :design_id, :user_id, :valid_until, :discount_type, :service, :for_email, :scheduled)
     end
