@@ -25,7 +25,7 @@ module API
 
           def api_user
             access = ApiAccess.find_by_key(headers['Authorization'])
-            access.present? ? access.user : nil
+            access.present? && access.live? ? access.user : nil
           end
 
           def record_api_request(request_type, path, desc)
