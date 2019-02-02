@@ -33,8 +33,8 @@ class Users::SessionsController < Devise::SessionsController
         if user.present?
           if user.login_key_sent.present?
             if user.login_key_sent > Time.now - 900
-              sign_in(user)
               user.update(login_key_sent: nil)
+              sign_in(user)
               redirect_to root_path, notice: "MAGIC! You've been signed in 💫"
             else
               reject_magic_login

@@ -1,7 +1,7 @@
 class VouchersController < ApplicationController
 
-  before_action :set_voucher, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
+  before_action :set_voucher, only: [:show, :edit, :update, :destroy, :scheduled, :capture, :success_schedule]
+  before_action :authenticate_user!
 
   layout 'headless', :only => [ :capture ]
 
