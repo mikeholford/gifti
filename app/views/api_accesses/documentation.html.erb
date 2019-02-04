@@ -102,7 +102,7 @@
                   <h2 class="has-text-weight-bold patrick is-size-2">Schedule a voucher</h2>
                   <p class="is-size-5">To schedule a voucher, you first need to <a href="#create_a_voucher" class="has-text-grey-dark"><u>create a voucher</u></a>.</p>
                   <pre>POST /voucher/:id/schedule</pre>
-                  <p class="is-size-5">You can also pass this value using a <code>client_id</code> query parameter</p>
+                  <p class="is-size-5">As a minimum we require <code>voucher_id</code>, <code>from</code>, <code>for_email</code> and <code>send_on</code></p>
 
                   <table class="table is-fullwidth">
                     <thead>
@@ -124,7 +124,7 @@
                       </tr>
                       <tr>
                         <th><code>from</code></th>
-                        <td>The name of the person sending the voucher<strong>Required</strong>.</td>
+                        <td>The name of the person sending the voucher. <strong>Required</strong>.</td>
                       </tr>
                       <tr>
                         <th><code>for_email</code></th>

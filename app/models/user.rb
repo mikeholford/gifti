@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :api_accesses
 
   after_create :create_secret_key
-  after_create :notify_admin
+  after_create :notify_admin if Rails.env.production?
   before_validation :assign_password, on: :create
 
   def create_secret_key

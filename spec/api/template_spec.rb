@@ -1,26 +1,30 @@
 require 'rails_helper'
 
 describe API::V1::Templates do
-  context 'when template endpoint is called' do
 
-    before do
-      @user = User.create(email: Faker::Internet.email)
-      @access = ApiAccess.create(name: Faker::Company.name, website_url: Faker::String.random, description: Faker::String.random, key: SecureRandom.hex, user_id: @user.id)
+  let(:api_access) { FactoryBot.create :api_access }
+
+  describe '/templates' do
+    context 'when fetching all templates' do
+      it 'returns an array of templates' do
+        get "/api/v1/templates", params: {}, headers: { 'Authorization' => api_access.key }
+        expect(JSON.parse(response.body)['data']).to be_an_instance_of(Array)
+      end
     end
-
-    it 'returns correct template' do
-      template = (Faker::Company.name).downcase.parameterize
-      @design = Design.create(template: template)
-      get "/api/v1/templates/#{template}", params: {}, headers: { 'Authorization' => @access.key }
-      expect(JSON.parse(response.body)['id']).to eq(@design.id)
-    end
-
-    it 'returns wrong template' do
-      template = (Faker::Company.name).downcase.parameterize
-      @design = Design.create(template: template)
-      get "/api/v1/templates/random", params: {}, headers: { 'Authorization' => @access.key }
-      expect(JSON.parse(response.body)['id']).to_not eq(@design.id)
-    end
-
   end
+
+  describe '/templates/:id' do
+    context 'when requesting a template' do
+      let(:design) { FactoryBot.create :design }
+      it 'returns correct template' do
+        get "/api/v1/templates/#{design.template}", params: {}, headers: { 'Authorization' => api_access.key }
+        expect(JSON.parse(response.body)['id']).to eq(design.template)
+      end
+      it 'returns wrong template' do
+        get "/api/v1/templates/random", params: {}, headers: { 'Authorization' => api_access.key }
+        expect(JSON.parse(response.body)['id']).to_not eq(design.template)
+      end
+    end
+  end
+
 end

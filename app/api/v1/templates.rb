@@ -36,7 +36,7 @@ module API
             width: design.width,
             height: design.height,
             name: design.name,
-            image: d.template_image_url
+            image: design.template_image_url
           }
           render result
         end

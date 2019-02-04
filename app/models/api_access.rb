@@ -3,7 +3,7 @@ class ApiAccess < ApplicationRecord
   has_many :api_requests
 
   after_create :generate_key
-  after_create :notify_admin
+  after_create :notify_admin if Rails.env.production?
 
   validates_presence_of :name, message: "must be present"
   validates_presence_of :website_url, message: "must be present"
