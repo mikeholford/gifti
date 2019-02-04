@@ -7,13 +7,21 @@
           <p class="subtitle has-text-white patrick">All fields marked with a * are required. Once you're done, you can choose to either download it or schedule it for delivery 😊</p>
         </div>
       </div>
-      <div class="columns">
+      <div class="columns is-desktop">
         <div class="column">
           <%= render 'form', voucher: @voucher %>
         </div>
         <div class="column">
           <br>
-          <%= image_tag ("designs/examples/#{@design.template}.jpg"), class: "" %>
+
+
+          <%= stylesheet_link_tag "designs/templates/#{@design.template}" %>
+
+          <div style="zoom: 0.8;">
+            <%= render "/designs/templates/#{@design.template}" %>
+          </div>
+
+          <%#= image_tag ("designs/examples/#{@design.template}.jpg"), class: "" %>
         </div>
       </div>
     </div>

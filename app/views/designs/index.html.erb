@@ -8,12 +8,12 @@
         </div>
       </div>
       <div class="columns is-multiline is-centered">
-        <% Design.all.each do |design| %>
+        <% Design.with_template.all.each do |design| %>
           <div class="column is-narrow">
 
             <div class="voucher-wrapper">
               <a href="/vouchers/new/?design=<%= design.template %>">
-                <%= image_tag("designs/examples/#{design.template}.jpg", style: "max-height: 250px; max-width: #{design.width}px", class: "voucher") %>
+                <%= image_tag("#{design.template_image_url}", style: "max-height: 250px; max-width: #{design.width}px", class: "voucher") %>
               </a>
             </div>
 

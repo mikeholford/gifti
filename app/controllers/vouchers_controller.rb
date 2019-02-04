@@ -18,8 +18,10 @@ class VouchersController < ApplicationController
       @user = User.find_by_secret_key(params[:key])
       if @user.present?
         @voucher = Voucher.find(params[:id])
+        @design = @voucher.design
       else
         redirect_to '/'
+
       end
     else
       redirect_to '/'
