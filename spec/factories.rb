@@ -18,6 +18,16 @@ FactoryBot.define do
     key { SecureRandom.hex }
   end
 
+  # Api Request
+  factory :api_request do
+    before(:create) do |api_request|
+      api_request.api_access = FactoryBot.create(:api_access)
+    end
+    request_type { ['get', 'post'].sample }
+    path { Faker::String.random }
+    description { Faker::String.random }
+  end
+
   # Design
   factory :design do
     name { Faker::Book.title }

@@ -63,7 +63,7 @@ module API
           voucher = Voucher.find_by_ref(params[:id])
 
           if voucher.scheduled?
-            error!('Voucher already scheduled, request a schedule update', 401)
+            error!('Voucher already scheduled', 401)
           else
             voucher.update!(
               from: params[:from],
