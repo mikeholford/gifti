@@ -8,7 +8,7 @@
         <div class="field">
           <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :heading, "Heading" %></label>
           <div class="control">
-            <%= form.text_field :heading, class: "input", placeholder: "Heading" %>
+            <%= form.text_field :heading, class: "input", placeholder: "Gifti Voucher" %>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
         <div class="field">
           <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :sub_heading, "Sub Heading" %></label>
           <div class="control">
-            <%= form.text_field :sub_heading, class: "input", placeholder: "Sub Heading" %>
+            <%= form.text_field :sub_heading, class: "input", placeholder: "The most unique gift on the planet" %>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class="field">
           <div class="control">
             <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :for, "For" %></label>
-            <%= form.text_field :for, class: "input", placeholder: "For" %>
+            <%= form.text_field :for, class: "input", placeholder: "Jane Doe" %>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
         <div class="field">
           <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :valid_until, "Valid Until" %></label>
           <div class="control">
-            <%= form.text_field :valid_until, class: "input", placeholder: "Valid Until", type: "date"%>
+            <%= form.text_field :valid_until, class: "input", placeholder: "Enter a date"%>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
         <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :value, "Value*" %></label>
         <div class="field has-addons">
           <div class="control">
-            <%= form.number_field :value, class: "input", placeholder: "Value*" %>
+            <%= form.number_field :value, class: "input", placeholder: "100" %>
           </div>
           <div class="control">
             <div class="select">
@@ -59,7 +59,7 @@
         <div class="field">
           <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :code, "Code" %></label>
           <div class="control">
-            <%= form.text_field :code, class: "input", placeholder: "Voucher Code" %>
+            <%= form.text_field :code, class: "input", placeholder: "UX100" %>
           </div>
         </div>
       </div>
@@ -105,14 +105,32 @@
   <% end %>
 
   <script type="text/javascript">
-    var calendars = bulmaCalendar.attach('[type="date"]', {
-      displayMode: 'dialog',
-      minDate: '<%= (Date.today).strftime('%d-%m-%Y')%>',
-      dateFormat: 'DD-MM-YYYY',
-      showHeader: false,
-      showFooter: true,
-    })
-
-
-
+    $('#voucher_heading').keyup(function () {
+      var value = $(this).val();
+      $('#heading').text( value );
+    });
+    $('#voucher_sub_heading').keyup(function () {
+      var value = $(this).val();
+      $('#sub-heading').text( value );
+    });
+    $('#voucher_for').keyup(function () {
+      var value = $(this).val();
+      $('#for').text( value );
+    });
+    $('#voucher_valid_until').keyup(function() {
+      var value = $(this).val();
+      $('#valid-until').text( value );
+    });
+    $('#voucher_value').keyup(function () {
+      var value = $(this).val();
+      $('#value').text( value );
+    });
+    $('#voucher_code').keyup(function () {
+      var value = $(this).val();
+      $('#code').text( value );
+    });
+    $('#voucher_service').keyup(function () {
+      var value = $(this).val();
+      $('#service').text( value );
+    });
   </script>

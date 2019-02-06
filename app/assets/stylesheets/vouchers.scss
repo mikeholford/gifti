@@ -11,3 +11,11 @@
   padding-top: 50px;
   padding-bottom: 50px;
 }
+
+.new-voucher-render {
+  @include mobile {zoom: 0.5;}
+  @include tablet {zoom: 1;}
+  @include desktop {zoom: 0.9;}
+  @include widescreen {zoom: 1.1;}
+  @include fullhd {zoom: 1.2;}
+}
