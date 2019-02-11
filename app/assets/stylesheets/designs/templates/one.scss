@@ -1,90 +1,93 @@
 // Template settings
 $template: "one";
-$width: 700px;
-$height: 280px;
+$ratio: 0.4;
+$height: 100%;
+$width: $height / $ratio;
 $primary: #F17474;
-
+$secondary: #6b6b6b;
 
 .voucher-wrapper##{$template} {
 
   max-width: $width;
-  height: $height;
+  max-height: $height;
+  height: 0;
+  padding-top: percentage($ratio);
+  font-size: 1vw;
+  @media screen and (min-width: $width) {font-size: 15px;}
 
-  #heading {
-    max-width: 420px;
+  @mixin wrap {
     overflow-x: hidden;
     white-space: nowrap;
-    font-size: 40px;
+  }
+
+  #heading {
+    @include wrap;
+    font-size: 5.5em;
     font-weight: 900;
+    max-width: 65%;
     color: $primary;
     position: relative;
-    top: 10px;
-    left: 20px;
+    top: 2%;
+    left: 2%;
   }
   #sub-heading {
-    max-width: 430px;
-    font-size: 18px;
+    @include wrap;
+    max-width: 60%;
+    font-size: 2.5em;
     font-weight: 700;
     color: #6b6b6b;
     position: relative;
-    top: 8px;
-    left: 20px;
+    top: 1%;
+    left: 2.4%;
   }
   #for {
-    max-width: 350px;
-    white-space: nowrap;
-    overflow-x: hidden;
-    font-size: 35px;
+    @include wrap;
+    max-width: 55%;
+    font-size: 5em;
     font-weight: 700;
     color: $primary;
     position: relative;
-    top: 30px;
-    left: 20px;
-    i {
-      font-size: 30px;
-      position: relative;
-      left: -5px;
-    }
+    top: 8%;
+    left: 2%;
   }
   #code {
-    max-width: 345px;
-    overflow-x: hidden;
-    font-size: 35px;
+    @include wrap;
+    max-width: 50%;
+    font-size: 5em;
     font-weight: 700;
     color: $primary;
     position: relative;
-    top: 25px;
-    left: 20px;
-    i {
-      font-size: 30px;
-      position: relative;
-      left: -5px;
-    }
+    top: 8%;
+    left: 2%;
   }
   #valid-until {
-    font-size: 20px;
+    @include wrap;
+    max-width: 25%;
+    font-size: 2.5em;
+    font-weight: 700;
     color: #ffffff;
     position: absolute;
-    top: 2px;
-    right: 15px;
-    font-weight: 500;
+    top: 2%;
+    right: 1%;
   }
   #value {
-    font-size: 80px;
+    @include wrap;
+    max-width: 38%;
+    font-size: 12em;
     color: #fff;
     font-weight: 700;
     position: absolute;
-    right: 15px;
-    top: 140px;
+    right: 1%;
+    bottom: 2%;
   }
   #service {
-    max-width: 275px;
-    overflow-x: hidden;
-    font-size: 20px;
+    @include wrap;
+    // max-width: 275px;
+    font-size: 2.5em;
     color: #fff;
     font-weight: 900;
     position: absolute;
-    right: 15px;
-    top: 240px;
+    right: 2%;
+    bottom: 2%;
   }
 }

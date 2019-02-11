@@ -123,7 +123,23 @@
     });
     $('#voucher_value').keyup(function () {
       var value = $(this).val();
-      $('#value').text( value );
+      $('#value-number').text( value );
+      if($('#voucher_discount_type').val() == '%'){
+        $('#discount-type-before').text("");
+        $('#discount-type-after').text($('#voucher_discount_type').val());
+      }else {
+        $('#discount-type-before').text($('#voucher_discount_type').val());
+        $('#discount-type-after').text("");
+      }
+    });
+    $('#voucher_discount_type').change(function () {
+      if($('#voucher_discount_type').val() == '%'){
+        $('#discount-type-before').text("");
+        $('#discount-type-after').text($('#voucher_discount_type').val());
+      }else {
+        $('#discount-type-before').text($('#voucher_discount_type').val());
+        $('#discount-type-after').text("");
+      }
     });
     $('#voucher_code').keyup(function () {
       var value = $(this).val();
@@ -131,6 +147,6 @@
     });
     $('#voucher_service').keyup(function () {
       var value = $(this).val();
-      $('#service').text( value );
+      $('#service').text( "Off " + value );
     });
   </script>

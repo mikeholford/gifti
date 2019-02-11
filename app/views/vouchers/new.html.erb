@@ -9,16 +9,28 @@
           <p class="subtitle has-text-white patrick">All fields marked with a * are required. Once you're done, you can choose to either download it or schedule it for delivery 😊</p>
         </div>
       </div>
+
       <div class="columns is-centered">
         <div class="column is-full-touch is-two-thirds ">
-
           <div class="new-voucher-render"><%= render "/designs/templates/#{@design.template}" %></div>
-          <br>
+        </div>
+      </div>
 
+      <div class="columns is-centered">
+        <div class="column is-full-touch is-two-thirds ">
           <%= render 'form', voucher: @voucher %>
         </div>
-
       </div>
+
     </div>
   </div>
 </section>
+
+
+<script type="text/javascript">
+  $(".voucher-wrapper#<%= @design.template %>").css("font-size", ($(".voucher-wrapper#<%= @design.template %>").width())*(1/100));
+
+  $(window).resize(function(){
+    $(".voucher-wrapper#<%= @design.template %>").css("font-size", ($(".voucher-wrapper#<%= @design.template %>").width())*(1/100));
+  c});
+</script>

@@ -1,44 +1,36 @@
 
 <div class="voucher-wrapper" style="background-image: url('<%=@design.template_image_url%>')" id="<%=@design.template%>">
 
-  <p id="heading"><stong>
-    <% if @voucher.heading.present? %><%=@voucher.heading%><% end %>
-  </stong></p>
+  <div class="voucher-content" style="position: absolute; height: 100%; width: 100%; top:0; bottom:0; left:0; right:0;">
+    <p id="heading"><stong>
+      <% if @voucher.heading.present? %><%=@voucher.heading%><% end %>
+    </stong></p>
 
-  <p id="sub-heading"><stong>
-    <% if @voucher.sub_heading.present? %><%=@voucher.sub_heading.truncate(80)%><% end %>
-  </stong></p>
+    <p id="sub-heading"><stong>
+      <% if @voucher.sub_heading.present? %><%=@voucher.sub_heading.truncate(80)%><% end %>
+    </stong></p>
 
-  <p id="for"
-    <% if @voucher.for.present? %>><%= @voucher.for %><% end %>
-  </p>
+    <p id="for"
+      <% if @voucher.for.present? %>><%= @voucher.for %><% end %>
+    </p>
 
-  <p id="code">
-    <% if @voucher.code.present? %><%= @voucher.code %><% end %>
-  </p>
+    <p id="code">
+      <% if @voucher.code.present? %><%= @voucher.code %><% end %>
+    </p>
 
-  <p id="valid-until">
-    <% if @voucher.valid_until.present? %><%= (@voucher.valid_until).strftime("#{@voucher.valid_until.day}.%m.%y") %><% end %>
-  </p>
+    <p id="valid-until">
+      <% if @voucher.valid_until.present? %><%= (@voucher.valid_until).strftime("#{@voucher.valid_until.day}.%m.%y") %><% end %>
+    </p>
 
-  <p id="value">
-    <% if @voucher.value.present? %><%= @voucher.discount_type unless @voucher.discount_type == "%"%><%= sprintf("%g", @voucher.value)%><%= @voucher.discount_type if @voucher.discount_type == "%"%><% end %>
-  </p>
 
-  <p id="service">
-    <% if @voucher.service.present? %>OFF <%= @voucher.service.upcase%><% end %>
-  </p>
+    <p id="value">
+      <span id="discount-type-before"><%= @voucher.discount_type unless @voucher.discount_type == "%"%></span><span id="value-number"><% if @voucher.value.present? %><%= sprintf("%g", @voucher.value)%><% end %></span><span id="discount-type-after"><%= @voucher.discount_type if @voucher.discount_type == "%"%></span>
+    </p>
+
+
+    <p id="service">
+      <% if @voucher.service.present? %>OFF <%= @voucher.service.upcase%><% end %>
+    </p>
+  </div>
 
 </div>
-
-<!--
-  <div class="voucher-wrapper" style="background-image: url('<%=@design.template_image_url%>')" id="<%=@design.template%>">
-      <p  id="heading"><stong>[Heading]</stong></p>
-      <p  id="sub-heading"><stong>[Sub Heading]</stong></p>
-      <p  id="for">[For]</p>
-      <p  id="code">[Code]</p>
-      <p  id="valid-until">22.02.19</p>
-      <p  id="value">[Value]</p>
-      <p  id="service">[Service]</p>
-  </div>
--->

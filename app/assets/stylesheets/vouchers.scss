@@ -1,9 +1,8 @@
 .voucher-wrapper {
-  background-position: center;
+  background-position: top left;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% auto;
   position: relative;
-  width: 100%;
   p {margin: 0;}
 }
 
@@ -13,9 +12,10 @@
 }
 
 .new-voucher-render {
-  @include mobile {zoom: 0.5;}
-  @include tablet {zoom: 1;}
-  @include desktop {zoom: 0.9;}
-  @include widescreen {zoom: 1.1;}
-  @include fullhd {zoom: 1.2;}
+  --width: 100vw;
+  @include mobile {zoom: calc( / var(--width));}
+  @include tablet {zoom: calc( / var(--width));}
+  @include desktop {zoom: calc( / var(--width));}
+  @include widescreen {zoom: calc( / var(--width));}
+  @include fullhd {zoom: calc( / var(--width));}
 }

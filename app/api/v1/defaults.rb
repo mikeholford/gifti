@@ -47,10 +47,15 @@ module API
         before do
           access = ApiAccess.find_by_key(headers['Authorization'])
           if access.present?
-            if ApiRequest.where(api_access_id: access.id).where(created_at: 1.hour.ago..Time.now).count >= 200
+            hourly = ApiRequest.where(api_access_id: access.id).where(created_at: 1.hour.ago..Time.now).count
+            monthly = ApiRequest.where(api_access_id: access.id).where(created_at: 1.month.ago..Time.now).count
+            if hourly >= 50
               error!('Hourly rate limit exceeded', 401)
-            elsif ApiRequest.where(api_access_id: access.id).where(created_at: 1.month.ago..Time.now).count >= 20000
+            elsif monthly >= 1000
               error!('Monthly rate limit exceeded', 401)
+            else
+              header 'X-Ratelimit-Limit', "1000"
+              header 'X-Ratelimit-Remaining', "#{1000 - monthly}"
             end
           end
         end
