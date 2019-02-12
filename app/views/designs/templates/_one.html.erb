@@ -3,33 +3,33 @@
 
   <div class="voucher-content" style="position: absolute; height: 100%; width: 100%; top:0; bottom:0; left:0; right:0;">
     <p id="heading"><stong>
-      <% if @voucher.heading.present? %><%=@voucher.heading%><% end %>
+      <% if @voucher.heading.present? %><%=@voucher.heading%><% else %>&nbsp;<% end %>
     </stong></p>
 
     <p id="sub-heading"><stong>
-      <% if @voucher.sub_heading.present? %><%=@voucher.sub_heading.truncate(80)%><% end %>
+      <% if @voucher.sub_heading.present? %><%=@voucher.sub_heading.truncate(80)%><% else %>&nbsp;<% end %>
     </stong></p>
 
     <p id="for"
-      <% if @voucher.for.present? %>><%= @voucher.for %><% end %>
+      <% if @voucher.for.present? %>><%= @voucher.for %><% else %>&nbsp;<% end %>
     </p>
 
     <p id="code">
-      <% if @voucher.code.present? %><%= @voucher.code %><% end %>
+      <% if @voucher.code.present? %><%= @voucher.code %><% else %>&nbsp;<% end %>
     </p>
 
     <p id="valid-until">
-      <% if @voucher.valid_until.present? %><%= (@voucher.valid_until).strftime("#{@voucher.valid_until.day}.%m.%y") %><% end %>
+      <% if @voucher.valid_until.present? %><%= (@voucher.valid_until).strftime("#{@voucher.valid_until.day}.%m.%y") %><% else %>&nbsp;<% end %>
     </p>
 
 
     <p id="value">
-      <span id="discount-type-before"><%= @voucher.discount_type unless @voucher.discount_type == "%"%></span><span id="value-number"><% if @voucher.value.present? %><%= sprintf("%g", @voucher.value)%><% end %></span><span id="discount-type-after"><%= @voucher.discount_type if @voucher.discount_type == "%"%></span>
+      <span id="discount-type-before"><%= @voucher.discount_type unless @voucher.discount_type == "%"%></span><span id="value-number"><% if @voucher.value.present? %><%= sprintf("%g", @voucher.value)%><% else %>&nbsp;<% end %></span><span id="discount-type-after"><%= @voucher.discount_type if @voucher.discount_type == "%"%></span>
     </p>
 
 
     <p id="service">
-      <% if @voucher.service.present? %>OFF <%= @voucher.service.upcase%><% end %>
+      <% if @voucher.service.present? %>OFF <%= @voucher.service.upcase%><% else %>&nbsp;<% end %>
     </p>
   </div>
 

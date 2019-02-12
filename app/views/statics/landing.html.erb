@@ -10,23 +10,33 @@
 
 
 <div class="landing-wrapper">
-  <section class="hero has-background-primary">
+  <section class="hero has-background-white">
     <div class="hero-body">
-      <div class="container has-text-centered">
-        <div class="columns">
-          <div class="column">
-            <h1 class="title patrick has-text-white" id="landing">CREATE YOUR OWN<br>GIFT VOUCHER</h1>
-            <% if current_user.present?%>
-              <%= link_to "Let's get creative", designs_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
-            <% else %>
-              <%= link_to "Let's get creative", new_user_registration_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
-            <% end %>
-            <p class="subtitle patrick has-text-white">or <a href="#more" class="has-text-white"><u>find out more</u></a></p>
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-half has-text-centered">
+            <%#= image_tag ("logo.png"), class: "logo" %>
+            <h1 class="title patrick" id="landing">Gift Vouchers as a service</h1>
+            <h2 class="subtitle has-text-grey-dark has-text-weight-bold" id="landing">Add gift vouchers to your app or website in minutes</h2>
           </div>
-          <div class="column">
+        </div>
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <% if current_user.present?%>
+              <%= link_to "Try it out", designs_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
+            <% else %>
+              <%= link_to "Try it out", new_user_registration_path, :class => 'button is-danger is-large has-text-weight-bold cta' %>
+            <% end %>
+            <!-- <p class="subtitle patrick has-text-white">or <a href="#more" class="has-text-white"><u>find out more</u></a></p> -->
+          </div>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-half has-text-centered">
+            <br>
             <%= image_tag ("landing/gift-card-2.png"), class: "" %>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -45,18 +55,3 @@
     </div>
   </section>
 </div>
-
-<script>
-  window.productHuntUpcoming = {
-    appId: 13814,
-    position: 'bottomLeft',
-  };
-
-  (function(doc, scr, src, a, b) {
-    a = doc.createElement(scr);
-    b = doc.getElementsByTagName(scr)[0];
-    a.async = true;
-    a.src = src;
-    b.parentNode.insertBefore(a, b);
-  })(document, 'script', 'https://assets.producthunt.com/assets/upwigloader.js');
-</script>

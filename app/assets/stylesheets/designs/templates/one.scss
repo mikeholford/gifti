@@ -15,13 +15,13 @@ $secondary: #6b6b6b;
   font-size: 1vw;
   @media screen and (min-width: $width) {font-size: 15px;}
 
-  @mixin wrap {
+  @mixin wrap_and_hide {
     overflow-x: hidden;
     white-space: nowrap;
   }
 
   #heading {
-    @include wrap;
+    overflow-x: hidden;
     font-size: 5.5em;
     font-weight: 900;
     max-width: 65%;
@@ -31,7 +31,7 @@ $secondary: #6b6b6b;
     left: 2%;
   }
   #sub-heading {
-    @include wrap;
+    overflow-x: hidden;
     max-width: 60%;
     font-size: 2.5em;
     font-weight: 700;
@@ -41,27 +41,27 @@ $secondary: #6b6b6b;
     left: 2.4%;
   }
   #for {
-    @include wrap;
+    @include wrap_and_hide;
     max-width: 55%;
     font-size: 5em;
     font-weight: 700;
     color: $primary;
     position: relative;
-    top: 8%;
+    top: 15%;
     left: 2%;
   }
   #code {
-    @include wrap;
+    @include wrap_and_hide;
     max-width: 50%;
     font-size: 5em;
     font-weight: 700;
     color: $primary;
     position: relative;
-    top: 8%;
+    top: 15%;
     left: 2%;
   }
   #valid-until {
-    @include wrap;
+    @include wrap_and_hide;
     max-width: 25%;
     font-size: 2.5em;
     font-weight: 700;
@@ -71,7 +71,7 @@ $secondary: #6b6b6b;
     right: 1%;
   }
   #value {
-    @include wrap;
+    @include wrap_and_hide;
     max-width: 38%;
     font-size: 12em;
     color: #fff;
@@ -81,7 +81,7 @@ $secondary: #6b6b6b;
     bottom: 2%;
   }
   #service {
-    @include wrap;
+    @include wrap_and_hide;
     // max-width: 275px;
     font-size: 2.5em;
     color: #fff;

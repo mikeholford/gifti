@@ -6,17 +6,17 @@
 
       <div class="column">
         <div class="field">
-          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :heading, "Heading" %></label>
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :heading, "Awesome Heading *" %></label>
           <div class="control">
-            <%= form.text_field :heading, class: "input", placeholder: "Gifti Voucher" %>
+            <%= form.text_field :heading, class: "input", placeholder: "#{@sample[:heading]}" %>
           </div>
         </div>
       </div>
       <div class="column">
         <div class="field">
-          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :sub_heading, "Sub Heading" %></label>
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :sub_heading, "Short Description" %></label>
           <div class="control">
-            <%= form.text_field :sub_heading, class: "input", placeholder: "The most unique gift on the planet" %>
+            <%= form.text_field :sub_heading, class: "input", placeholder: "#{@sample[:sub_heading]}" %>
           </div>
         </div>
       </div>
@@ -26,16 +26,16 @@
       <div class="column">
         <div class="field">
           <div class="control">
-            <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :for, "For" %></label>
-            <%= form.text_field :for, class: "input", placeholder: "Jane Doe" %>
+            <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :for, "This voucher is for" %></label>
+            <%= form.text_field :for, class: "input", placeholder: "#{@sample[:for]}" %>
           </div>
         </div>
       </div>
       <div class="column">
         <div class="field">
-          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :valid_until, "Valid Until" %></label>
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :valid_until, "It's Valid Until" %></label>
           <div class="control">
-            <%= form.text_field :valid_until, class: "input", placeholder: "Enter a date"%>
+            <%= form.text_field :valid_until, class: "input", placeholder: "#{@sample[:valid_until]}"%>
           </div>
         </div>
       </div>
@@ -43,14 +43,14 @@
 
     <div class="columns is-variable is-1">
       <div class="column is-narrow">
-        <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :value, "Value*" %></label>
+        <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :value, "Value" %></label>
         <div class="field has-addons">
           <div class="control">
-            <%= form.number_field :value, class: "input", placeholder: "100" %>
+            <%= form.number_field :value, class: "input", placeholder: "#{@sample[:value]}"%>
           </div>
           <div class="control">
             <div class="select">
-              <%= form.select :discount_type, options_for_select(["%", "$", "£"]) %>
+              <%= form.select :discount_type, options_for_select(["%", "$", "£"], selected: "#{@sample[:discount_type]}") %>
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="field">
           <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :code, "Code" %></label>
           <div class="control">
-            <%= form.text_field :code, class: "input", placeholder: "UX100" %>
+            <%= form.text_field :code, class: "input", placeholder: "#{@sample[:code]}" %>
           </div>
         </div>
       </div>
@@ -70,9 +70,9 @@
     <div class="columns is-variable is-1">
       <div class="column">
         <div class="field">
-          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :service, "Service*" %></label>
+          <label class="label is-size-5 is-size-6-touch has-text-white"><%= form.label :service, "Where does the discount apply?" %></label>
           <div class="control">
-            <%= form.text_field :service, class: "input", placeholder: "Service*, i.e. where the discont applies" %>
+            <%= form.text_field :service, class: "input", placeholder: "#{@sample[:service]}" %>
           </div>
         </div>
       </div>
@@ -81,7 +81,9 @@
     <div class="columns is-variable is-1">
       <div class="column">
         <div class="control">
-          <input type="submit" name="commit" value="Generate Voucher" data-disable-with="Generating", class="button is-danger is-medium has-text-weight-bold  is-inverted">
+          <p class=" has-text-white"><strong class="has-text-white">N.B</strong> Any field not filled in will be <strong class="has-text-white">removed</strong> once you click <strong class="has-text-white">'Generate Voucher'</strong></p>
+          <br>
+          <input type="submit" name="commit" value="Generate Voucher" data-disable-with="Please wait...", class="button is-danger is-medium has-text-weight-bold  is-inverted">
           <p class="help is-white has-text-weight-bold">*Required fields</p>
         </div>
       </div>
@@ -105,48 +107,87 @@
   <% end %>
 
   <script type="text/javascript">
+
+    //Set value
+    $(document).ready(function() {
+      $('#heading').text("<%= @sample[:heading].html_safe %>");
+      $('#sub-heading').text("<%= @sample[:sub_heading].html_safe %>");
+      $('#for').text("<%= @sample[:for].html_safe %>");
+      $('#valid-until').text("<%= @sample[:valid_until].html_safe %>");
+      $('#value-number').text("<%= @sample[:value].html_safe %>");
+      $('#code').text("<%= @sample[:code].html_safe %>");
+      $('#service').text("<%= @sample[:service].html_safe %>");
+
+      SetDiscountType("<%= @sample[:discount_type].html_safe %>");
+    });
+
+    // Heading
     $('#voucher_heading').keyup(function () {
       var value = $(this).val();
       $('#heading').text( value );
+      if(value == ""){$('#heading').html( "&nbsp;" );}
     });
+
+    // Sub Heading
     $('#voucher_sub_heading').keyup(function () {
       var value = $(this).val();
       $('#sub-heading').text( value );
+      if(value == ""){$('#sub-heading').html( "&nbsp;" );}
     });
+
+    // For
     $('#voucher_for').keyup(function () {
       var value = $(this).val();
       $('#for').text( value );
+      if(value == ""){$('#for').html( "&nbsp;" );}
     });
+
+    //Valid Until
     $('#voucher_valid_until').keyup(function() {
       var value = $(this).val();
       $('#valid-until').text( value );
+      if(value == ""){$('#valid-until').html( "&nbsp;" );}
     });
+
+    //Value
     $('#voucher_value').keyup(function () {
       var value = $(this).val();
       $('#value-number').text( value );
-      if($('#voucher_discount_type').val() == '%'){
-        $('#discount-type-before').text("");
-        $('#discount-type-after').text($('#voucher_discount_type').val());
-      }else {
-        $('#discount-type-before').text($('#voucher_discount_type').val());
-        $('#discount-type-after').text("");
-      }
+      if(value == ""){$('#value-number').html( "&nbsp;" );}
+      SetDiscountType("");
     });
+
+    //Discount Type
     $('#voucher_discount_type').change(function () {
-      if($('#voucher_discount_type').val() == '%'){
-        $('#discount-type-before').text("");
-        $('#discount-type-after').text($('#voucher_discount_type').val());
-      }else {
-        $('#discount-type-before').text($('#voucher_discount_type').val());
-        $('#discount-type-after').text("");
-      }
+      SetDiscountType("");
     });
+
+    //Code
     $('#voucher_code').keyup(function () {
       var value = $(this).val();
       $('#code').text( value );
+      if(value == ""){$('#code').html( "&nbsp;" );}
     });
+
+    //Service
     $('#voucher_service').keyup(function () {
       var value = $(this).val();
-      $('#service').text( "Off " + value );
+      if(value != ""){
+        $('#service').text( "Off " + value );
+      }else {
+        $('#service').html( "&nbsp;" );
+      }
     });
+
+
+    function SetDiscountType(type) {
+      if(type == ""){var type = $('#voucher_discount_type').val()}
+      if(type == '%'){
+        $('#discount-type-before').text("");
+        $('#discount-type-after').text(type);
+      }else {
+        $('#discount-type-before').text(type);
+        $('#discount-type-after').text("");
+      }
+    }
   </script>

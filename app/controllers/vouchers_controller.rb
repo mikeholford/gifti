@@ -42,6 +42,7 @@ class VouchersController < ApplicationController
       @design = Design.where(template: params[:design]).last
       if @design.present?
         @voucher = Voucher.new
+        params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
       else
         redirect_to designs_path
       end
@@ -61,6 +62,7 @@ class VouchersController < ApplicationController
         format.json { render :show, status: :created, location: @voucher }
       else
         @design = Design.find(@voucher.design_id)
+        params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample 
         format.html { render :new, alert: 'Please try again...' }
         format.json { render json: @voucher.errors, status: :unprocessable_entity }
       end
