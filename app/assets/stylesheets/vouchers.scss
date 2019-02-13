@@ -10,12 +10,3 @@
   padding-top: 50px;
   padding-bottom: 50px;
 }
-
-.new-voucher-render {
-  --width: 100vw;
-  @include mobile {zoom: calc( / var(--width));}
-  @include tablet {zoom: calc( / var(--width));}
-  @include desktop {zoom: calc( / var(--width));}
-  @include widescreen {zoom: calc( / var(--width));}
-  @include fullhd {zoom: calc( / var(--width));}
-}

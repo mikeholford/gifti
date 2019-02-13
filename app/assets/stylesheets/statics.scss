@@ -4,10 +4,24 @@
   }
   .title#landing {
     font-size: 50px;
-    margin-top: 50px;
+    margin-top: 100px;
+    font-weight: 300;
+    @include tablet {font-size: 60px;}
+  }
+  .gift-card {
+    margin-top: 100px;
   }
   .cta {
     margin-top: 20px;
     font-size: 30px;
+  }
+
+  .feature-wrapper {
+    .feature {
+      img {
+        padding: 10px;
+        max-width: 300px;
+      }
+    }
   }
 }
