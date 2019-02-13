@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get 'magic/:key', to: 'users/sessions#magic_login'
   end
 
-  match '/vouchers/:id/capture' => 'vouchers#capture', via: [:get, :post], as: :capture_voucher
+  match '/vouchers/:id/capture' => 'vouchers#capture', via: [:get], as: :capture_voucher
   match '/vouchers/:id/schedule' => 'vouchers#schedule', via: [:get, :post], as: :schedule_voucher
   match '/vouchers/:id/schedule/success' => 'vouchers#success_schedule', via: [:get, :post], as: :success_schedule_voucher
 

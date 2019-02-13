@@ -21,7 +21,6 @@ class VouchersController < ApplicationController
         @design = @voucher.design
       else
         redirect_to '/'
-
       end
     else
       redirect_to '/'
@@ -62,7 +61,7 @@ class VouchersController < ApplicationController
         format.json { render :show, status: :created, location: @voucher }
       else
         @design = Design.find(@voucher.design_id)
-        params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample 
+        params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
         format.html { render :new, alert: 'Please try again...' }
         format.json { render json: @voucher.errors, status: :unprocessable_entity }
       end
@@ -99,8 +98,7 @@ class VouchersController < ApplicationController
   private
 
     def set_voucher
-      @voucher = Voucher.find(params[:id])
-      redirect_to root_path if @voucher.user_id != current_user.id
+      @voucher = current_user.vouchers.find(params[:id])
     end
 
     def voucher_params
