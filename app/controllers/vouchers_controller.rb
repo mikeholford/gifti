@@ -1,6 +1,6 @@
 class VouchersController < ApplicationController
 
-  before_action :set_voucher, only: [:show, :edit, :update, :destroy, :scheduled, :success_schedule]
+  before_action :set_voucher, only: [:show, :edit, :update, :destroy, :schedule, :success_schedule]
   before_action :authenticate_user!, except: [:capture]
 
   layout 'headless', :only => [ :capture ]
@@ -10,25 +10,15 @@ class VouchersController < ApplicationController
   end
 
   def show
-    @voucher = Voucher.find(params[:id])
   end
 
   def capture
-    if params[:key].present?
-      @user = User.find_by_secret_key(params[:key])
-      if @user.present?
-        @voucher = Voucher.find(params[:id])
-        @design = @voucher.design
-      else
-        redirect_to '/'
-      end
-    else
-      redirect_to '/'
-    end
+    @user = User.find_by_secret_key(params[:key])
+    @voucher = Voucher.find(params[:id])
+    @design = @voucher.design
   end
 
   def schedule
-    @voucher = Voucher.find(params[:id])
   end
 
   def success_schedule
@@ -37,17 +27,10 @@ class VouchersController < ApplicationController
   end
 
   def new
-    if params[:design].present?
-      @design = Design.where(template: params[:design]).last
-      if @design.present?
-        @voucher = Voucher.new
-        params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
-      else
-        redirect_to designs_path
-      end
-    else
-      redirect_to designs_path
-    end
+    @voucher = Voucher.new
+    @design = Design.find_by_template(params[:design])
+    params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
+    redirect_to designs_path unless params[:design].present?
   end
 
   def edit
@@ -55,39 +38,33 @@ class VouchersController < ApplicationController
 
   def create
     @voucher = Voucher.new(voucher_params.merge(:user_id => current_user.id))
-    respond_to do |format|
-      if @voucher.save
-        redirect_to @voucher, notice: 'Your voucher has been created!'
-      else
-        @design = Design.find(@voucher.design_id)
-        params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
-        render :new, alert: 'Please try again...'
-      end
+    if @voucher.save
+      redirect_to @voucher, notice: 'Your voucher has been created!'
+    else
+      @design = Design.find(@voucher.design_id)
+      params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
+      render :new, alert: 'Please try again...'
     end
   end
 
   def update
-    respond_to do |format|
-      if @voucher.update(voucher_params)
-        if params[:voucher][:update_schedule].present?
-          redirect_to schedule_voucher_path(:check => true), notice: 'Voucher updated'
-        elsif params[:voucher][:scheduled].present?
-          redirect_to success_schedule_voucher_path, notice: 'Your voucher has been scheduled'
-        else
-          redirect_to @voucher, notice: 'voucher was successfully updated.'
-        end
+    if @voucher.update(voucher_params)
+      if params[:voucher][:update_schedule].present?
+        redirect_to schedule_voucher_path(:check => true), notice: 'Voucher successfully updated'
+      elsif params[:voucher][:scheduled].present?
+        redirect_to success_schedule_voucher_path, notice: 'Your voucher has been scheduled'
       else
-        @design = Design.find(@voucher.design_id)
-        render :schedule, alert: 'Please try again...'
+        redirect_to @voucher, notice: 'Voucher successfully updated.'
       end
+    else
+      @design = Design.find(@voucher.design_id)
+      render :schedule, alert: 'Please try again...'
     end
   end
 
   def destroy
     @voucher.destroy
-    respond_to do |format|
-      redirect_to vouchers_url, notice: 'voucher was successfully destroyed.'
-    end
+    redirect_to vouchers_url, notice: 'Voucher successfully destroyed.'
   end
 
   private
