@@ -57,13 +57,11 @@ class VouchersController < ApplicationController
     @voucher = Voucher.new(voucher_params.merge(:user_id => current_user.id))
     respond_to do |format|
       if @voucher.save
-        format.html { redirect_to @voucher, notice: 'Your voucher has been created!' }
-        format.json { render :show, status: :created, location: @voucher }
+        redirect_to @voucher, notice: 'Your voucher has been created!'
       else
         @design = Design.find(@voucher.design_id)
         params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
-        format.html { render :new, alert: 'Please try again...' }
-        format.json { render json: @voucher.errors, status: :unprocessable_entity }
+        render :new, alert: 'Please try again...'
       end
     end
   end
@@ -72,17 +70,15 @@ class VouchersController < ApplicationController
     respond_to do |format|
       if @voucher.update(voucher_params)
         if params[:voucher][:update_schedule].present?
-          format.html { redirect_to schedule_voucher_path(:check => true), notice: 'Voucher updated' }
+          redirect_to schedule_voucher_path(:check => true), notice: 'Voucher updated'
         elsif params[:voucher][:scheduled].present?
-          format.html { redirect_to success_schedule_voucher_path, notice: 'Your voucher has been scheduled' }
+          redirect_to success_schedule_voucher_path, notice: 'Your voucher has been scheduled'
         else
-          format.html { redirect_to @voucher, notice: 'voucher was successfully updated.' }
-          format.json { render :show, status: :ok, location: @voucher }
+          redirect_to @voucher, notice: 'voucher was successfully updated.'
         end
       else
         @design = Design.find(@voucher.design_id)
-        format.html { render :schedule, alert: 'Please try again...' }
-        format.json { render json: @voucher.errors, status: :unprocessable_entity }
+        render :schedule, alert: 'Please try again...'
       end
     end
   end
@@ -90,8 +86,7 @@ class VouchersController < ApplicationController
   def destroy
     @voucher.destroy
     respond_to do |format|
-      format.html { redirect_to vouchers_url, notice: 'voucher was successfully destroyed.' }
-      format.json { head :no_content }
+      redirect_to vouchers_url, notice: 'voucher was successfully destroyed.'
     end
   end
 
