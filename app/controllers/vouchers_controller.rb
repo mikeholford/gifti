@@ -14,8 +14,11 @@ class VouchersController < ApplicationController
 
   def capture
     @user = User.find_by_secret_key(params[:key])
-    @voucher = Voucher.find(params[:id])
-    @design = @voucher.design
+    if @user.present?
+      @voucher = @user.vouchers.find(params[:id])
+    else
+      render_not_found
+    end
   end
 
   def schedule
@@ -30,7 +33,7 @@ class VouchersController < ApplicationController
     @voucher = Voucher.new
     @design = Design.find_by_template(params[:design])
     params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
-    redirect_to designs_path unless params[:design].present?
+    redirect_to designs_path, alert: 'Please select a design' unless @design.present?
   end
 
   def edit
@@ -42,8 +45,9 @@ class VouchersController < ApplicationController
       redirect_to @voucher, notice: 'Your voucher has been created!'
     else
       @design = Design.find(@voucher.design_id)
-      params[:blank].present? ? @sample = Voucher::BLANK : @sample = Voucher::FAKE.sample
-      render :new, alert: 'Please try again...'
+      @sample = params[:blank].present? ? Voucher::BLANK : Voucher::FAKE.sample
+      flash[:alert] = 'Please try again...'
+      render :new
     end
   end
 
