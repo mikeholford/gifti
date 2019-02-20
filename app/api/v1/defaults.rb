@@ -34,6 +34,31 @@ module API
             update_request_count(access)
           end
 
+          def hourly_monthly_count(access)
+
+            hourly = $redis.get("#{access.user.id}_hourly")
+            hourly = hourly.present? ? hourly : create_hourly_count(access)
+
+            monthly = $redis.get("#{access.user.id}_monthly")
+            monthly = monthly.present? ? monthly : create_monthly_count(access)
+
+            # TODO: Access value of redis and split to fetch count
+            # Return as hourly, monthly
+
+          end
+
+          def create_hourly_count(access)
+            value = "#{Time.now.strftime('%Y%m%dT%H%M')};0"
+            $redis.set("#{access.user.id}_hourly", value)
+            return value
+          end
+
+          def create_monthly_count(access)
+            value = "#{Time.now.strftime('%Y%m%dT%H%M')};0"
+            $redis.set("#{access.user.id}_monthly", value)
+            return value
+          end
+
           def update_request_count(access)
             if access.request_count.present?
               access.update(request_count: access.request_count += 1)
@@ -47,6 +72,7 @@ module API
         before do
           access = ApiAccess.find_by_key(headers['Authorization'])
           if access.present?
+            # Convert belwo to a redis count with fetch_or_create_count
             hourly = ApiRequest.where(api_access_id: access.id).where(created_at: 1.hour.ago..Time.now).count
             monthly = ApiRequest.where(api_access_id: access.id).where(created_at: 1.month.ago..Time.now).count
             if hourly >= 50
@@ -57,6 +83,8 @@ module API
               header 'X-Ratelimit-Limit', "1000"
               header 'X-Ratelimit-Remaining', "#{1000 - monthly}"
             end
+          else
+            error!('401 Unauthorized', 401)
           end
         end
 

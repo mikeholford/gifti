@@ -68,6 +68,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'faker'
 gem 'validates_timeliness', '~> 5.0.0.alpha3'
+gem 'redis'
+gem 'redis-namespace'
 
 # Views
 gem 'kaminari'
