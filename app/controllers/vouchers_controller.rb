@@ -26,7 +26,7 @@ class VouchersController < ApplicationController
 
   def success_schedule
     @voucher = Voucher.find(params[:id])
-    redirect_to schedule_voucher_path if @voucher.scheduled == false
+    redirect_to schedule_voucher_path, alert: 'Voucher not scheduled' unless @voucher.scheduled?
   end
 
   def new
@@ -54,15 +54,16 @@ class VouchersController < ApplicationController
   def update
     if @voucher.update(voucher_params)
       if params[:voucher][:update_schedule].present?
-        redirect_to schedule_voucher_path(:check => true), notice: 'Voucher successfully updated'
+        redirect_to schedule_voucher_path(:check => true), notice: 'Voucher scheduled updated'
       elsif params[:voucher][:scheduled].present?
-        redirect_to success_schedule_voucher_path, notice: 'Your voucher has been scheduled'
+        redirect_to success_schedule_voucher_path, notice: 'Your voucher has been scheduled 🎉'
       else
         redirect_to @voucher, notice: 'Voucher successfully updated.'
       end
     else
       @design = Design.find(@voucher.design_id)
-      render :schedule, alert: 'Please try again...'
+      flash[:alert] = 'Please try again...'
+      render :schedule
     end
   end
 
