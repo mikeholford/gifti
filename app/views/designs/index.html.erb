@@ -1,25 +1,30 @@
-<section class="design-wrapper hero has-background-primary">
+<section class="design-wrapper hero has-background-white">
   <div class="hero-body">
     <div class="container">
       <div class="columns">
-        <div class="column is-full has-text-centered">
-          <h1 class="title has-text-weight-bold patrick has-text-white" id="design">First, pick a template:</h1>
+        <div class="column is-full">
+          <h1 class="title patrick has-text-black" id="design">First, select a template:</h1>
           <br>
         </div>
       </div>
-      <div class="columns is-multiline is-centered">
-        <% Design.with_template.all.each do |design| %>
+      <div class="columns is-multiline">
+        <% @designs.each do |d| %>
           <div class="column is-narrow">
-
             <div class="voucher-wrapper">
-              <a href="/vouchers/new/?design=<%= design.template %>">
-                <%= image_tag("#{design.template_image_url}", style: "max-height: 250px; max-width: #{design.width}px", class: "voucher") %>
+              <a href="/vouchers/new/?design=<%= d.template %>">
+                <%= image_tag("#{d.template_image_url}", style: "max-height: 250px; max-width: #{d.width}px", class: "voucher") %>
               </a>
             </div>
-
           </div>
         <% end %>
       </div>
+
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <%= paginate @designs if @designs.any? %>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>

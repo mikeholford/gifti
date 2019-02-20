@@ -69,6 +69,9 @@ gem 'devise'
 gem 'faker'
 gem 'validates_timeliness', '~> 5.0.0.alpha3'
 
+# Views
+gem 'kaminari'
+
 # API
 gem 'grape'
 gem 'rack-cors', :require => 'rack/cors'
